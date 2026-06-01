@@ -1,0 +1,43 @@
+/* =============================================
+   ESTILOS GLOBAIS - TCC SISTEMA TÊXTIL
+   Aqui fica o reset básico que o professor
+   ensinou a colocar em todo projeto Angular
+   ============================================= */
+
+/* Importando a fonte do Google Fonts
+   Escolhi Cormorant Garamond porque parece
+   com as fontes das marcas de luxo que pesquisei */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;600&display=swap');
+
+/* Reset básico - professor falou que é boa prática */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #000;
+  background-color: #fff;
+}
+
+/* Tira o sublinhado padrão dos links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Remove estilo padrão dos botões */
+button {
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+}
+
+input {
+  font-family: 'Montserrat', sans-serif;
+}

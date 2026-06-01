@@ -1,0 +1,92 @@
+<!-- =============================================
+     TELA PRINCIPAL — TCC SISTEMA TÊXTIL
+     ============================================= -->
+
+<div class="pagina-wrapper">
+
+  <!-- ===== NAVBAR =====
+       Lembrar de componentizar esse menu depois,
+       tá muito junto aqui mas funciona por enquanto -->
+  <header class="navbar">
+
+    <!-- Logo no centro -->
+    <div class="navbar-logo">
+      <span class="logo-texto">TESSILE</span>
+    </div>
+
+    <!-- Links de navegação - as coleções sazonais que o professor pediu -->
+    <nav class="navbar-nav">
+      <a href="#outono"    class="nav-link">OUTONO</a>
+      <a href="#inverno"   class="nav-link">INVERNO</a>
+      <a href="#primavera" class="nav-link">PRIMAVERA</a>
+      <a href="#verao"     class="nav-link">VERÃO</a>
+    </nav>
+
+    <!-- Botão de sair no canto direito -->
+    <div class="navbar-acoes">
+      <span class="usuario-label">{{ nomeUsuario }}</span>
+      <button class="btn-sair" (click)="sair()">SAIR</button>
+    </div>
+
+  </header>
+
+  <!-- ===== HERO / BANNER PRINCIPAL ===== -->
+  <section class="hero">
+    <div class="hero-conteudo">
+      <p class="hero-eyebrow">COLEÇÕES 2025</p>
+      <h1 class="hero-titulo">NOVA<br>TEMPORADA</h1>
+      <p class="hero-subtitulo">
+        Explore as linhas sazonais da nossa coleção têxtil
+      </p>
+      <!-- Linha decorativa -->
+      <div class="hero-linha"></div>
+    </div>
+  </section>
+
+  <!-- ===== GRID DE COLEÇÕES =====
+       TODO: virar um componente filho quando der,
+       por enquanto tá tudo aqui mesmo -->
+  <section class="colecoes" id="colecoes">
+
+    <div class="colecoes-header">
+      <h2 class="colecoes-titulo">ESTAÇÕES</h2>
+    </div>
+
+    <div class="colecoes-grid">
+
+      <!-- Gerando os cards a partir do array do TypeScript -->
+      <div
+        class="colecao-card"
+        *ngFor="let col of colecoes"
+        [id]="col.estacao.toLowerCase()"
+        (mouseenter)="ativarCard(col.id)"
+        (mouseleave)="desativarCard()"
+        [class.card-ativo]="cardAtivo === col.id"
+      >
+        <!-- Bloco de cor da estação (placeholder por enquanto, vai virar imagem) -->
+        <div class="card-imagem" [style.background-color]="col.cor">
+          <span class="card-numero">0{{ col.id }}</span>
+        </div>
+
+        <!-- Informações do card -->
+        <div class="card-info">
+          <h3 class="card-estacao">{{ col.estacao }}</h3>
+          <p class="card-descricao">{{ col.descricao }}</p>
+          <a href="#" class="card-link">VER COLEÇÃO →</a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===== RODAPÉ ===== -->
+  <footer class="rodape">
+    <div class="rodape-conteudo">
+      <p class="rodape-marca">TESSILE</p>
+      <p class="rodape-info">© 2025 · TCC Engenharia Têxtil · Todos os direitos reservados</p>
+    </div>
+  </footer>
+
+</div>

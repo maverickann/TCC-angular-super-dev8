@@ -1,0 +1,83 @@
+<!-- =============================================
+     TELA DE LOGIN — TCC SISTEMA TÊXTIL
+     ============================================= -->
+
+<div class="login-page">
+
+  <!-- Lado esquerdo: imagem/decoração -->
+  <div class="login-panel-esquerdo">
+    <div class="painel-conteudo">
+      <div class="painel-linha"></div>
+      <p class="painel-label">GESTÃO TÊXTIL</p>
+      <h2 class="painel-titulo">A qualidade<br>começa no<br>detalhe.</h2>
+      <div class="painel-linha"></div>
+    </div>
+  </div>
+
+  <!-- Lado direito: formulário -->
+  <div class="login-panel-direito">
+    <div class="login-card">
+
+      <!-- Identidade visual do sistema -->
+      <div class="brand">
+        <h1 class="brand-nome">TESSILE</h1>
+        <p class="brand-sub">SISTEMA DE GESTÃO</p>
+      </div>
+
+      <!-- Formulário de login -->
+      <div class="form-wrapper">
+
+        <!-- Campo de usuário -->
+        <div class="campo">
+          <label for="usuario">USUÁRIO</label>
+          <input
+            type="text"
+            id="usuario"
+            [(ngModel)]="usuario"
+            placeholder="Seu usuário"
+            autocomplete="off"
+          />
+        </div>
+
+        <!-- Campo de senha com botão pra mostrar/esconder -->
+        <div class="campo">
+          <label for="senha">SENHA</label>
+          <div class="input-senha-wrapper">
+            <input
+              [type]="mostrarSenha ? 'text' : 'password'"
+              id="senha"
+              [(ngModel)]="senha"
+              placeholder="••••••••"
+            />
+            <!-- Botão de mostrar/esconder senha -->
+            <button
+              type="button"
+              class="btn-olho"
+              (click)="alternarSenha()"
+              [title]="mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'"
+            >
+              {{ mostrarSenha ? '○' : '●' }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Mensagem de erro: só aparece quando tem algo escrito -->
+        <div class="erro-wrapper" *ngIf="mensagemErro">
+          <span class="erro-icone">—</span>
+          <p class="erro-texto">{{ mensagemErro }}</p>
+        </div>
+
+        <!-- Botão de login -->
+        <button class="btn-entrar" (click)="fazerLogin()">
+          ENTRAR
+        </button>
+
+      </div>
+
+      <!-- Rodapé discreto -->
+      <p class="login-footer">TCC · Engenharia Têxtil · 2025</p>
+
+    </div>
+  </div>
+
+</div>
