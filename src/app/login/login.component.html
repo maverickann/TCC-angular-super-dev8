@@ -30,32 +30,19 @@
         <!-- Campo de usuário -->
         <div class="campo">
           <label for="usuario">USUÁRIO</label>
-          <input
-            type="text"
-            id="usuario"
-            [(ngModel)]="usuario"
-            placeholder="Seu usuário"
-            autocomplete="off"
-          />
+          <input type="text" id="usuario" name="usuario" [(ngModel)]="usuario" placeholder="Seu usuário"
+            autocomplete="off" />
         </div>
 
         <!-- Campo de senha com botão pra mostrar/esconder -->
         <div class="campo">
           <label for="senha">SENHA</label>
           <div class="input-senha-wrapper">
-            <input
-              [type]="mostrarSenha ? 'text' : 'password'"
-              id="senha"
-              [(ngModel)]="senha"
-              placeholder="••••••••"
-            />
+            <input [type]="mostrarSenha ? 'text' : 'password'" id="senha" name="senha" [(ngModel)]="senha"
+              placeholder="••••••••" />
             <!-- Botão de mostrar/esconder senha -->
-            <button
-              type="button"
-              class="btn-olho"
-              (click)="alternarSenha()"
-              [title]="mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'"
-            >
+            <button type="button" class="btn-olho" (click)="alternarSenha()"
+              [title]="mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'">
               {{ mostrarSenha ? '○' : '●' }}
             </button>
           </div>

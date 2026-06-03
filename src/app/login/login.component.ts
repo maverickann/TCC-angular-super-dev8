@@ -1,45 +1,38 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
-// Componente da tela de login.
-// Por enquanto tá tudo aqui no componente mesmo,
-// sem service. O professor disse que pra defesa do TCC tá bom assim.
 @Component({
   selector: 'app-login',
+  standalone: true,
+  imports: [FormsModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  usuario = '';
+  senha = '';
+  mensagemErro = '';
+  mostrarSenha = false;
 
-  // Variáveis pra guardar o que o usuário digita nos campos
-  usuario: string = '';
-  senha: string = '';
-
-  // Mensagem de erro - começa vazia, aparece só se errar o login
-  mensagemErro: string = '';
-
-  // Controla se a senha tá visível ou não (o olhinho)
-  mostrarSenha: boolean = false;
-
-  // Injetando o Router pra conseguir navegar pras outras telas
   constructor(private router: Router) {}
 
-  // Aqui valida a senha que o professor pediu pra deixar fixa por enquanto
-  // TODO: futuramente isso vai vir de uma API real com o backend
-  fazerLogin(): void {
-    if (this.usuario === 'Admin' && this.senha === '12346') {
-      // Deu certo! Redireciona pra tela principal
-      this.mensagemErro = '';
-      this.router.navigate(['/home']);
-    } else {
-      // Limpa os campos se der erro e mostra a mensagem
-      this.mensagemErro = 'Usuário ou senha incorretos.';
-      this.senha = '';
-    }
-  }
+  fazerLogin() {
+  const u = this.usuario.trim();
+  const s = this.senha.trim();
 
-  // Alterna a visibilidade da senha (mostrar/esconder)
-  alternarSenha(): void {
+  if (u === 'Admin' && s === '123456') {
+    alert('OK! Redirecionando...');
+    this.router.navigate(['home']);
+  } else {
+    alert('FALHOU | usuario: [' + u + '] | senha: [' + s + ']');
+    this.mensagemErro = 'Usuario ou senha incorretos.';
+    this.senha = '';
+  }
+}
+
+  alternarSenha() {
     this.mostrarSenha = !this.mostrarSenha;
   }
 }

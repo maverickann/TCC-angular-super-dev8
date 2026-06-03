@@ -15,12 +15,12 @@
     </div>
 
     <!-- Links de navegação - as coleções sazonais que o professor pediu -->
-    <nav class="navbar-nav">
-      <a href="#outono"    class="nav-link">OUTONO</a>
-      <a href="#inverno"   class="nav-link">INVERNO</a>
-      <a href="#primavera" class="nav-link">PRIMAVERA</a>
-      <a href="#verao"     class="nav-link">VERÃO</a>
-    </nav>
+  <nav class="navbar-nav">
+  <a (click)="scrollTo('outono')"    class="nav-link">OUTONO</a>
+  <a (click)="scrollTo('inverno')"   class="nav-link">INVERNO</a>
+  <a (click)="scrollTo('primavera')" class="nav-link">PRIMAVERA</a>
+  <a (click)="scrollTo('verao')"     class="nav-link">VERÃO</a>
+</nav>
 
     <!-- Botão de sair no canto direito -->
     <div class="navbar-acoes">
@@ -72,7 +72,7 @@
         <div class="card-info">
           <h3 class="card-estacao">{{ col.estacao }}</h3>
           <p class="card-descricao">{{ col.descricao }}</p>
-          <a href="#" class="card-link">VER COLEÇÃO →</a>
+          <a href="javascript:void(0)" class="card-link">VER COLEÇÃO →</a>
         </div>
 
       </div>
