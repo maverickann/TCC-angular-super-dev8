@@ -18,6 +18,8 @@ export class LoginComponent {
 
   constructor(private router: Router) {}
 
+
+
   fazerLogin() {
   const u = this.usuario.trim();
   const s = this.senha.trim();

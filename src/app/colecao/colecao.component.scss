@@ -1,0 +1,288 @@
+/* =============================================
+   ESTILOS — PÁGINA DE COLEÇÃO
+   Mesmo estilo da home pra manter consistencia
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;600&display=swap');
+
+.colecao-wrapper {
+  min-height: 100vh;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== NAVBAR (repetindo o estilo da home) ===== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48px;
+  height: 72px;
+  border-bottom: 1px solid #e8e8e8;
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.logo-texto {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  letter-spacing: 8px;
+  color: #000;
+  font-weight: 400;
+}
+
+.navbar-nav {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-link {
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: #000;
+  font-weight: 600;
+  opacity: 0.6;
+  transition: opacity 0.25s ease;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  opacity: 1;
+}
+
+/* ===== HERO DA COLECAO ===== */
+.hero-colecao {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* parallax igual a home */
+  padding: 100px 48px;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+/* camada escura por cima da imagem */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.68);
+}
+
+.hero-conteudo {
+  color: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 8px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.hero-titulo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4.5rem;
+  font-weight: 300;
+  letter-spacing: 20px;
+  margin-bottom: 20px;
+}
+
+.hero-subtitulo {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 2px;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 32px;
+}
+
+.hero-linha {
+  width: 40px;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: 0 auto;
+}
+
+/* ===== SECAO DE PRODUTOS ===== */
+.produtos-section {
+  flex: 1;
+  padding: 64px 48px;
+}
+
+.produtos-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+  margin-bottom: 48px;
+}
+
+.produtos-titulo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 4px;
+  color: #000;
+}
+
+.produtos-qtd {
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: #bbb;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Grid com 3 colunas */
+.produtos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.produto-card {
+  cursor: pointer;
+}
+
+/* Imagem do produto em preto e branco, colorida no hover */
+.produto-imagem {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background-size: cover;
+  background-position: center top;
+  background-color: #111; /* fallback se a imagem nao carregar */
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 16px;
+  filter: grayscale(100%);
+  transition: filter 0.5s ease;
+}
+
+/* No hover mostra a cor original da foto */
+.produto-card.produto-ativo .produto-imagem {
+  filter: grayscale(0%);
+}
+
+/* Overlay escuro com o botao que aparece no hover */
+.produto-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.38);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.produto-overlay.visivel {
+  opacity: 1;
+}
+
+.btn-ver {
+  border: 1px solid #fff;
+  background: transparent;
+  color: #fff;
+  padding: 10px 24px;
+  font-size: 0.55rem;
+  letter-spacing: 3px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-ver:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+/* Informacoes do produto */
+.produto-info {
+  padding: 0 4px;
+}
+
+.produto-categoria {
+  font-size: 0.55rem;
+  letter-spacing: 3px;
+  color: #bbb;
+  font-family: 'Montserrat', sans-serif;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.produto-nome {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+.produto-preco {
+  font-size: 0.7rem;
+  color: #555;
+  letter-spacing: 1px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ===== RODAPÉ ===== */
+.rodape {
+  border-top: 1px solid #eee;
+  padding: 32px 48px;
+}
+
+.rodape-conteudo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rodape-marca {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  letter-spacing: 5px;
+  color: #000;
+}
+
+.rodape-info {
+  font-size: 0.6rem;
+  color: #bbb;
+  letter-spacing: 1px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* mensagem de erro quando estacao nao existe */
+.colecao-nao-encontrada {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  color: #bbb;
+  letter-spacing: 3px;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 1024px) {
+  .produtos-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .navbar { padding: 0 20px; }
+  .hero-titulo { font-size: 3rem; }
+  .hero-colecao { background-attachment: scroll; } /* parallax off no mobile */
+  .produtos-section { padding: 40px 20px; }
+  .produtos-grid { grid-template-columns: 1fr; }
+  .rodape-conteudo { flex-direction: column; gap: 12px; text-align: center; }
+}

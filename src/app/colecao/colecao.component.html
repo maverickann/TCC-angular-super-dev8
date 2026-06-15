@@ -1,0 +1,93 @@
+<!-- =============================================
+     PAGINA DE COLECAO POR ESTACAO
+     Exibe os produtos da estacao selecionada
+     ============================================= -->
+
+<!-- *ngIf garante que so renderiza quando os dados estiverem carregados -->
+<div class="colecao-wrapper" *ngIf="estacaoAtual">
+
+  <!-- ===== NAVBAR SIMPLES ===== -->
+  <header class="navbar">
+    <div class="navbar-logo">
+      <span class="logo-texto" (click)="voltarHome()" style="cursor: pointer">TESSILE</span>
+    </div>
+    <nav class="navbar-nav">
+      <!-- Botao de voltar pra home -->
+      <a class="nav-link" (click)="voltarHome()">← VOLTAR</a>
+    </nav>
+  </header>
+
+  <!-- ===== HERO DA ESTACAO ===== -->
+  <!-- A imagem de fundo muda de acordo com a estacao (binding dinamico) -->
+  <section
+    class="hero-colecao"
+    [style.background-image]="'url(' + estacaoAtual.imagemHero + ')'"
+  >
+    <div class="hero-overlay"></div>
+    <div class="hero-conteudo">
+      <p class="hero-eyebrow">TESSILE · 2025</p>
+      <!-- Titulo dinamico: VERÃO / INVERNO etc -->
+      <h1 class="hero-titulo">{{ estacaoAtual.titulo }}</h1>
+      <p class="hero-subtitulo">{{ estacaoAtual.descricao }}</p>
+      <div class="hero-linha"></div>
+    </div>
+  </section>
+
+  <!-- ===== GRID DE PRODUTOS ===== -->
+  <section class="produtos-section">
+
+    <div class="produtos-header">
+      <h2 class="produtos-titulo">{{ estacaoAtual.subtitulo }}</h2>
+      <!-- Mostra quantas pecas tem na colecao -->
+      <span class="produtos-qtd">{{ estacaoAtual.produtos.length }} PEÇAS</span>
+    </div>
+
+    <div class="produtos-grid">
+
+      <!-- Percorre o array de produtos da estacao -->
+      <div
+        class="produto-card"
+        *ngFor="let produto of estacaoAtual.produtos"
+        (mouseenter)="ativarProduto(produto.id)"
+        (mouseleave)="desativarProduto()"
+        [class.produto-ativo]="produtoHover === produto.id"
+      >
+        <!-- Imagem do produto com overlay no hover -->
+        <div
+          class="produto-imagem"
+          [style.background-image]="'url(' + produto.imagem + ')'"
+        >
+          <!-- Overlay escuro que aparece quando passa o mouse -->
+          <div class="produto-overlay" [class.visivel]="produtoHover === produto.id">
+            <button class="btn-ver">VER DETALHES</button>
+          </div>
+        </div>
+
+        <!-- Informacoes abaixo da imagem -->
+        <div class="produto-info">
+          <span class="produto-categoria">{{ produto.categoria }}</span>
+          <h3 class="produto-nome">{{ produto.nome }}</h3>
+          <!-- Chama o metodo que formata o preco em R$ -->
+          <p class="produto-preco">{{ formatarPreco(produto.preco) }}</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===== RODAPÉ ===== -->
+  <footer class="rodape">
+    <div class="rodape-conteudo">
+      <p class="rodape-marca">TESSILE</p>
+      <p class="rodape-info">© 2025 · TCC Engenharia Têxtil · Todos os direitos reservados</p>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Mensagem de fallback caso a estacao nao seja encontrada -->
+<div class="colecao-nao-encontrada" *ngIf="!estacaoAtual">
+  <p>Coleção não encontrada. Redirecionando...</p>
+</div>
