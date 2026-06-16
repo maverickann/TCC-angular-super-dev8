@@ -22,10 +22,15 @@ export class LoginComponent {
   const u = this.usuario.trim();
   const s = this.senha.trim();
 
+  //pq que "u e S " como variaveis??????????
   if (u === 'Admin' && s === '123456') {
     alert('OK! Redirecionando...');
     this.router.navigate(['home']);
-  } else {
+  } else  if (u === 'Fabrica' && s === '123456') {
+    alert('OK! Redirecionando...');
+    this.router.navigate(['movimentacao']);
+
+   }else {
     alert('FALHOU | usuario: [' + u + '] | senha: [' + s + ']');
     this.mensagemErro = 'Usuario ou senha incorretos.';
     this.senha = '';

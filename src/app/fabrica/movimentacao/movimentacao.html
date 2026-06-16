@@ -1,45 +1,121 @@
 <h1>Movimentação</h1>
 
-<div>
+<nav>
     //barra de links
-</div>
+</nav>
 <div>
+    <fieldset>
+        <legend>Sobre o produto</legend>
+<!--
+        
+
+aprender Reactive Forms!!!!!!
+
+
+
+-->        
 <label for="of">OF</label>
-<input type="text">
+<input type="number" id="of">
 
-<label for="setor-inicial">Setor inicial/atual</label>
-<input type="text">
+<fieldset>
+    <legend>Setor</legend>
+    
+<label for="inicial">inicial/atual</label>
+<input type="search" id="inicial">
 
-<label for="setor-final">Setor Final</label>
-<input type="text">
+<label for="final">Final</label>
+<input type="text" id="final">
+</fieldset>
+
 <label for="fluxo">Fluxo</label>
-<input type="text">
+<input type="text" id="fluxo">
 
 <label for="envio">Envio</label>
-<input type="text">
+<input type="text" id="envio">
 
 <label for="producao">Produção</label>
-<input type="text">
+<input type="text" id="producao">
 
-<label for="empresa-atual">empresa atual</label>
-<input type="text">
+    </fieldset>
+<fieldset>
+    <legend>transporte/movemntaçao/localizaçao</legend>
 
-<label for="empresa-destino">Empresa Destinataria</label>
-<input type="text">
+    
+<label for="empresa_atual">empresa atual</label>
+<input type="text" id="empresa_atual">
 
+<label for="empresa_destino">Empresa Destinataria</label>
+<input type="text" id="empresa_destino">
+
+</fieldset>
+
+    <fieldset>
+        <legend>condiçao do produto</legend>
+        
 <label for="obs">Observação:</label>
-<input type="text">
+<input type="text" id="obs">
 
 <label for="qualidade">Qualidade:</label>
-<input type="text">
+<input type="text" id="qualidade">
 
+    </fieldset>
 <label for="verificaçao-piloto">Possui piloto?</label>
-<select name="sim" id="sim">sim</select>
+
+<input type="radio" id="sim" name="piloto" value="sim">
+<label for="sim">Sim</label>
+
+<input type="radio" id="nao" name="piloto" value="nao">
+<label for="nao">Não</label>
 
 <label for=""></label>
 <input type="text">
 </div>
 <div>
+    //essa parte é a tabela
+    <table>
+      <thead>
+          <tr>
+            <th>Quatidade pedida</th>
+            <th>Quantidade total</th>
+            <th>Saldo de peças</th>
+            <th>Data de expedição</th>
+            <th>Resonsavel Legal</th>//pessoa que produz a peça
+            <th></th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+                <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+                <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr></tbody>
+
+    </table>
+
+</div>
+
+<section class="acoes">
     <button>Incluir</button>
 
     <button>alterar</button>
@@ -50,13 +126,9 @@
 
     <button>Relatorio de Envio</button>
 
+
     <button>Relatorio de corte</button>
 
     <button>baixa de const</button>
 
-
-
-    
-
-
-</div>
+</section>
