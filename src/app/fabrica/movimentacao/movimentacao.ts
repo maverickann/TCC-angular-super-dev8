@@ -2,11 +2,14 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [FormsModule, CommonModule],
+  selector: 'app-movimentacao',
+  imports:   [FormsModule],
   templateUrl: './movimentacao.html',
  styleUrls: ['./movimentacao.scss']
 })

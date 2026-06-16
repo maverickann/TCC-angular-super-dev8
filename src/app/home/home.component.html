@@ -1,51 +1,46 @@
 <!-- =============================================
      TELA PRINCIPAL — TCC SISTEMA TÊXTIL
+     Atualizado: nova imagem no hero + links funcionando
      ============================================= -->
 
 <div class="pagina-wrapper">
 
-  <!-- ===== NAVBAR =====
-       Lembrar de componentizar esse menu depois,
-       tá muito junto aqui mas funciona por enquanto -->
+  <!-- ===== NAVBAR ===== -->
   <header class="navbar">
-
-    <!-- Logo no centro -->
     <div class="navbar-logo">
       <span class="logo-texto">TESSILE</span>
     </div>
 
-    <!-- Links de navegação - as coleções sazonais que o professor pediu -->
-  <nav class="navbar-nav">
-  <a (click)="scrollTo('outono')"    class="nav-link">OUTONO</a>
-  <a (click)="scrollTo('inverno')"   class="nav-link">INVERNO</a>
-  <a (click)="scrollTo('primavera')" class="nav-link">PRIMAVERA</a>
-  <a (click)="scrollTo('verao')"     class="nav-link">VERÃO</a>
-</nav>
+    <!-- Links que rolam a pagina ate a secao da estacao -->
+    <nav class="navbar-nav">
+      <a (click)="scrollTo('outono')"    class="nav-link">OUTONO</a>
+      <a (click)="scrollTo('inverno')"   class="nav-link">INVERNO</a>
+      <a (click)="scrollTo('primavera')" class="nav-link">PRIMAVERA</a>
+      <a (click)="scrollTo('verao')"     class="nav-link">VERÃO</a>
+    </nav>
 
-    <!-- Botão de sair no canto direito -->
     <div class="navbar-acoes">
       <span class="usuario-label">{{ nomeUsuario }}</span>
+      <a (click)="irPara('movimentacao')" class="nav-link">MOVIMENTAÇÃO</a>
       <button class="btn-sair" (click)="sair()">SAIR</button>
     </div>
-
   </header>
 
-  <!-- ===== HERO / BANNER PRINCIPAL ===== -->
+  <!-- ===== HERO COM IMAGEM DE FUNDO ===== -->
+  <!-- A imagem fica no CSS (.hero background-image) -->
   <section class="hero">
+    <div class="hero-overlay"></div>
     <div class="hero-conteudo">
       <p class="hero-eyebrow">COLEÇÕES 2026</p>
       <h1 class="hero-titulo">NOVA<br>TEMPORADA</h1>
       <p class="hero-subtitulo">
         Explore as linhas sazonais da nossa coleção têxtil
       </p>
-      <!-- Linha decorativa -->
       <div class="hero-linha"></div>
     </div>
   </section>
 
-  <!-- ===== GRID DE COLEÇÕES =====
-       TODO: virar um componente filho quando der,
-       por enquanto tá tudo aqui mesmo -->
+  <!-- ===== GRID DE COLEÇÕES ===== -->
   <section class="colecoes" id="colecoes">
 
     <div class="colecoes-header">
@@ -54,25 +49,30 @@
 
     <div class="colecoes-grid">
 
-      <!-- Gerando os cards a partir do array do TypeScript -->
+      <!-- Percorro o array de colecoes com ngFor -->
       <div
         class="colecao-card"
         *ngFor="let col of colecoes"
-        [id]="col.estacao.toLowerCase()"
+        [id]="col.rota"
         (mouseenter)="ativarCard(col.id)"
         (mouseleave)="desativarCard()"
         [class.card-ativo]="cardAtivo === col.id"
+        (click)="irParaColecao(col.rota)"
+        style="cursor: pointer"
       >
-        <!-- Bloco de cor da estação (placeholder por enquanto, vai virar imagem) -->
-        <div class="card-imagem" [style.background-color]="col.cor">
+        <!-- Imagem da estacao com filtro preto e branco pelo CSS -->
+        <div
+          class="card-imagem"
+          [style.background-image]="'url(' + col.imagem + ')'"
+        >
           <span class="card-numero">0{{ col.id }}</span>
         </div>
 
-        <!-- Informações do card -->
         <div class="card-info">
           <h3 class="card-estacao">{{ col.estacao }}</h3>
           <p class="card-descricao">{{ col.descricao }}</p>
-          <a href="javascript:void(0)" class="card-link">VER COLEÇÃO →</a>
+          <!-- routerLink navega pra /colecao/verao etc -->
+          <a class="card-link" [routerLink]="['/colecao', col.rota]">VER COLEÇÃO →</a>
         </div>
 
       </div>
