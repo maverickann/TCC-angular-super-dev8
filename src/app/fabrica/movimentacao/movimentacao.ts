@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
   selector: 'app-movimentacao',
-  imports:   [FormsModule],
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './movimentacao.html',
- styleUrls: ['./movimentacao.scss']
+  styleUrls: ['./movimentacao.scss']
 })
 export class Movimentacao {
 
@@ -29,7 +27,7 @@ form: FormGroup;
       empresa_atual: new FormControl(''),
       empresa_destino: new FormControl(''),
       obs: new FormControl(''),
-      qualidade
+      qualidade: new FormControl(''),
 
     })
   }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 // Tipagem simples de um produto da colecao
@@ -23,7 +23,7 @@ interface DadosEstacao {
 @Component({
   selector: 'app-colecao',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './colecao.component.html',
   styleUrls: ['./colecao.component.scss']
 })

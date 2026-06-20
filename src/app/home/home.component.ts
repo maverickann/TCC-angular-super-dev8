@@ -16,10 +16,10 @@ export class HomeComponent {
   // Array com as 4 estacoes
   // Cada uma tem um campo "rota" sem acento pra usar na URL
   colecoes = [
-    { id: 1, estacao: 'OUTONO',    descricao: 'Colecao Outono 2026',    cor: '#1a1a1a' },
-    { id: 2, estacao: 'INVERNO',   descricao: 'Colecao Inverno 2026',   cor: '#2d2d2d' },
-    { id: 3, estacao: 'PRIMAVERA', descricao: 'Colecao Primavera 2026', cor: '#3f3f3f' },
-    { id: 4, estacao: 'VERAO',     descricao: 'Colecao Verao 2026',     cor: '#111'    }
+    { id: 1, estacao: 'OUTONO',    descricao: 'Colecao Outono 2026',    cor: '#1a1a1a', rota: 'outono',    imagem: 'assets/outono.jpg' },
+    { id: 2, estacao: 'INVERNO',   descricao: 'Colecao Inverno 2026',   cor: '#2d2d2d', rota: 'inverno',   imagem: 'assets/inverno.jpg' },
+    { id: 3, estacao: 'PRIMAVERA', descricao: 'Colecao Primavera 2026', cor: '#3f3f3f', rota: 'primavera', imagem: 'assets/primavera.jpg' },
+    { id: 4, estacao: 'VERAO',     descricao: 'Colecao Verao 2026',     cor: '#111',    rota: 'verao',     imagem: 'assets/verao.jpg' }
   ];
 
   // guarda qual card esta com o mouse em cima (null = nenhum)
