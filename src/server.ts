@@ -24,6 +24,9 @@ const angularApp = new AngularNodeAppEngine();
  * ```
  */
 
+app.use('/assets', express.static('src/assets'));
+
+
 /**
  * Serve static files from /browser
  */
