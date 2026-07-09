@@ -17,9 +17,9 @@ export class RodapeComponent {
   // Deixei num array pra ficar fácil de adicionar ou tirar
   // uma rede depois — o HTML percorre essa lista sozinho.
   redesSociais = [
-    { nome: 'Instagram', arroba: '@tessile.oficial', link: 'https://instagram.com/tessile.oficial' },
-    { nome: 'YouTube',   arroba: '@tessileoficial',  link: 'https://youtube.com/@tessileoficial' },
-    { nome: 'TikTok',    arroba: '@tessile.oficial', link: 'https://tiktok.com/@tessile.oficial' },
-    { nome: 'X',         arroba: '@tessileoficial',  link: 'https://x.com/tessileoficial' }
+    { nome: 'Instagram', arroba: '@urban.viluz', link: 'https://instagram.com/urban.viluz' },
+    { nome: 'YouTube',   arroba: '@urbanviluz',  link: 'https://youtube.com/@urbanviluz' },
+    { nome: 'TikTok',    arroba: '@urban.viluz', link: 'https://tiktok.com/@urban.viluz' },
+    { nome: 'X',         arroba: '@urbanviluz',  link: 'https://x.com/urbanviluz' }
   ];
 }
