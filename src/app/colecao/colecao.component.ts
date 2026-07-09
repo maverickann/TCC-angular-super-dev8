@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit, signal } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { CarrinhoService } from '../servicos/carrinho.service';
+import { TemaService } from '../servicos/tema.service';
+import { RodapeComponent } from '../rodape/rodape.component';
 
 // Tipagem simples de um produto da colecao
 interface Produto {
@@ -23,7 +26,7 @@ interface DadosEstacao {
 @Component({
   selector: 'app-colecao',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RodapeComponent, RouterLink], // rodapé compartilhado + links de rota
   templateUrl: './colecao.component.html',
   styleUrls: ['./colecao.component.scss']
 })
@@ -33,13 +36,19 @@ export class ColecaoComponent implements OnInit {
   estacaoAtual: DadosEstacao | null = null;
   produtoHover: number | null = null; // controla o efeito de hover nos cards
 
+  // guarda o id do produto que acabou de ir pro carrinho
+  // (só pra trocar o texto do botão por "✓ ADICIONADO" por 1 segundo).
+  // Usei "signal" porque o valor volta pra null dentro de um setTimeout,
+  // e o signal avisa a tela sozinho quando o valor muda.
+  produtoAdicionado = signal<number | null>(null);
+
   // Catalogo completo das 4 estacoes com os produtos
   // Usei fotos do Unsplash pra simular imagens de produtos reais
   private catalogo: { [chave: string]: DadosEstacao } = {
 
     'verao': {
       titulo: 'VERÃO',
-      subtitulo: 'Coleção Verão 2025',
+      subtitulo: 'Coleção Verão 2026',
       descricao: 'Peças leves e sofisticadas para os dias mais quentes do ano',
       imagemHero: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=1920&q=80&fit=crop',
       produtos: [
@@ -54,7 +63,7 @@ export class ColecaoComponent implements OnInit {
 
     'outono': {
       titulo: 'OUTONO',
-      subtitulo: 'Coleção Outono 2025',
+      subtitulo: 'Coleção Outono 2026',
       descricao: 'Tons terrosos e texturas que acompanham a mudança das estações',
       imagemHero: 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1920&q=80&fit=crop',
       produtos: [
@@ -69,7 +78,7 @@ export class ColecaoComponent implements OnInit {
 
     'inverno': {
       titulo: 'INVERNO',
-      subtitulo: 'Coleção Inverno 2025',
+      subtitulo: 'Coleção Inverno 2026',
       descricao: 'Elegância e conforto para enfrentar o frio com sofisticação',
       imagemHero: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1920&q=80&fit=crop',
       produtos: [
@@ -84,7 +93,7 @@ export class ColecaoComponent implements OnInit {
 
     'primavera': {
       titulo: 'PRIMAVERA',
-      subtitulo: 'Coleção Primavera 2025',
+      subtitulo: 'Coleção Primavera 2026',
       descricao: 'Cores vibrantes e leveza para celebrar o renascer da natureza',
       imagemHero: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1920&q=80&fit=crop',
       produtos: [
@@ -101,7 +110,9 @@ export class ColecaoComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute, // pega o parametro da URL (:estacao)
-    private router: Router
+    private router: Router,
+    public carrinho: CarrinhoService, // public pra usar direto no HTML
+    public tema: TemaService
   ) {}
 
   ngOnInit(): void {
@@ -124,8 +135,19 @@ export class ColecaoComponent implements OnInit {
     return preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
   }
 
-  voltarHome() {
-    this.router.navigate(['/home']);
+  // Botão do card: coloca a peça no carrinho de compras
+  adicionarAoCarrinho(produto: Produto) {
+    this.carrinho.adicionar(produto);
+
+    // feedback visual: o botão vira "✓ ADICIONADO" por 1 segundo
+    this.produtoAdicionado.set(produto.id);
+    setTimeout(() => {
+      // só apago se o aviso ainda for DESTE produto — se o usuário
+      // clicou em outro logo em seguida, deixo o aviso novo no lugar
+      if (this.produtoAdicionado() === produto.id) {
+        this.produtoAdicionado.set(null);
+      }
+    }, 1000);
   }
 
   ativarProduto(id: number)  { this.produtoHover = id; }

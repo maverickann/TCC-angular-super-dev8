@@ -2,7 +2,15 @@
      TELA DE LOGIN — TCC SISTEMA TÊXTIL
      ============================================= -->
 
-<div class="login-page">
+<!-- <main> marca o conteúdo principal da página (acessibilidade) -->
+<main class="login-page">
+
+  <!-- Botão de tema flutuante (modo claro/escuro também no login) -->
+  <button class="btn-tema-login" (click)="tema.alternarTema()"
+    [attr.aria-label]="tema.escuro ? 'Mudar para modo claro' : 'Mudar para modo escuro'"
+    [title]="tema.escuro ? 'Mudar para modo claro' : 'Mudar para modo escuro'">
+    {{ tema.escuro ? '☀' : '☾' }}
+  </button>
 
   <!-- Lado esquerdo: imagem/decoração -->
   <div class="login-panel-esquerdo">
@@ -24,8 +32,9 @@
         <p class="brand-sub">SISTEMA DE GESTÃO</p>
       </div>
 
-      <!-- Formulário de login -->
-      <div class="form-wrapper">
+      <!-- Formulário de login.
+           Usar a tag <form> de verdade faz a tecla Enter enviar o login -->
+      <form class="form-wrapper" (ngSubmit)="fazerLogin()">
 
         <!-- Campo de usuário -->
         <div class="campo">
@@ -40,8 +49,10 @@
           <div class="input-senha-wrapper">
             <input [type]="mostrarSenha ? 'text' : 'password'" id="senha" name="senha" [(ngModel)]="senha"
               placeholder="••••••••" />
-            <!-- Botão de mostrar/esconder senha -->
+            <!-- Botão de mostrar/esconder senha.
+                 O aria-label diz ao leitor de tela o que o botão faz -->
             <button type="button" class="btn-olho" (click)="alternarSenha()"
+              [attr.aria-label]="mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'"
               [title]="mostrarSenha ? 'Ocultar senha' : 'Mostrar senha'">
               {{ mostrarSenha ? '○' : '●' }}
             </button>
@@ -54,17 +65,20 @@
           <p class="erro-texto">{{ mensagemErro }}</p>
         </div>
 
-        <!-- Botão de login -->
-        <button class="btn-entrar" (click)="fazerLogin()">
+        <!-- Botão de login (type=submit envia o formulário) -->
+        <button type="submit" class="btn-entrar">
           ENTRAR
         </button>
 
-      </div>
+        <!-- O login é opcional: dá pra voltar e navegar sem entrar -->
+        <a class="link-voltar" routerLink="/home">← CONTINUAR SEM LOGIN</a>
+
+      </form>
 
       <!-- Rodapé discreto -->
-      <p class="login-footer">TCC · Engenharia Têxtil · 2025</p>
+      <p class="login-footer">TCC · Engenharia Têxtil · 2026</p>
 
     </div>
   </div>
 
-</div>
+</main>

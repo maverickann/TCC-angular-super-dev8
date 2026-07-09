@@ -1,0 +1,118 @@
+<!-- =============================================
+     PÁGINA DE CATÁLOGO — com rolagem infinita
+     Os produtos vão aparecendo conforme a página desce
+     ============================================= -->
+
+<div class="catalogo-wrapper">
+
+  <!-- ===== NAVBAR (mesmo estilo da home) ===== -->
+  <!-- Usei routerLink (e não (click)) nos links porque assim eles viram
+       links de verdade, que funcionam com a tecla Tab e com leitor de tela -->
+  <header class="navbar">
+    <nav class="navbar-nav">
+      <a class="nav-link" routerLink="/home">← VOLTAR</a>
+    </nav>
+
+    <div class="navbar-logo">
+      <a class="logo-texto" routerLink="/home">TESSILE</a>
+    </div>
+
+    <div class="navbar-acoes">
+      <!-- Botão que alterna entre modo claro e escuro -->
+      <button class="btn-tema" (click)="tema.alternarTema()"
+        [attr.aria-label]="tema.escuro ? 'Mudar para modo claro' : 'Mudar para modo escuro'"
+        [title]="tema.escuro ? 'Mudar para modo claro' : 'Mudar para modo escuro'">
+        {{ tema.escuro ? '☀' : '☾' }}
+      </button>
+
+      <!-- Link do carrinho com o contador de itens -->
+      <a class="nav-link nav-carrinho" routerLink="/carrinho">
+        CARRINHO
+        <!-- o contador só aparece se tiver pelo menos 1 item -->
+        @if (carrinho.totalItens() > 0) {
+          <span class="carrinho-badge">{{ carrinho.totalItens() }}</span>
+        }
+      </a>
+    </div>
+  </header>
+
+  <!-- Aviso invisível pro leitor de tela: anuncia quando um produto
+       entra no carrinho (o aria-live faz o anúncio automático) -->
+  <p class="sr-only" aria-live="polite">
+    @if (produtoAdicionado()) {
+      {{ produtoAdicionado() }} adicionado ao carrinho
+    }
+  </p>
+
+  <!-- ===== CABEÇALHO DO CATÁLOGO ===== -->
+  <!-- <main> marca o conteúdo principal da página (acessibilidade) -->
+  <main class="catalogo-section">
+
+    <div class="catalogo-header">
+      <div>
+        <h1 class="catalogo-titulo">CATÁLOGO COMPLETO</h1>
+        <p class="catalogo-subtitulo">Todas as peças, de todas as estações</p>
+      </div>
+      <!-- mostra quantos produtos já carregaram na tela
+           (produtosVisiveis é um signal, por isso os parênteses) -->
+      <span class="catalogo-qtd">{{ produtosVisiveis().length }} PEÇAS EXIBIDAS</span>
+    </div>
+
+    <!-- ===== GRID DE PRODUTOS ===== -->
+    <div class="catalogo-grid">
+
+      <!-- O @for repete este card pra cada produto visível.
+           Conforme o usuário rola a página, a lista produtosVisiveis
+           cresce e novos cards aparecem aqui automaticamente -->
+      @for (produto of produtosVisiveis(); track produto.nome) {
+        <div class="produto-card">
+
+          <!-- Foto do produto (preto e branco, ganha cor no hover via CSS) -->
+          <div class="produto-imagem" [style.background-image]="'url(' + produto.imagem + ')'"></div>
+
+          <div class="produto-info">
+            <span class="produto-categoria">{{ produto.categoria }}</span>
+            <!-- h2 porque o título da página é h1 (a ordem dos títulos
+                 não pode pular níveis, senão o leitor de tela se perde) -->
+            <h2 class="produto-nome">{{ produto.nome }}</h2>
+            <p class="produto-preco">{{ formatarPreco(produto.preco) }}</p>
+
+            <!-- Botão de compra: quando clica, o texto vira "✓ ADICIONADO"
+                 por 1 segundo (controlado no arquivo .ts) -->
+            <button
+              class="btn-carrinho"
+              [class.adicionado]="produtoAdicionado() === produto.nome"
+              (click)="adicionarAoCarrinho(produto)">
+              {{ produtoAdicionado() === produto.nome ? '✓ ADICIONADO' : 'ADICIONAR AO CARRINHO' }}
+            </button>
+          </div>
+
+        </div>
+      }
+
+    </div>
+
+    <!-- ===== AVISOS DA ROLAGEM INFINITA ===== -->
+
+    <!-- aparece enquanto a próxima leva de produtos "carrega" -->
+    @if (carregando()) {
+      <div class="aviso-carregando">
+        <div class="spinner"></div>
+        <p>CARREGANDO MAIS PEÇAS...</p>
+      </div>
+    }
+
+    <!-- aparece quando todos os produtos já foram exibidos -->
+    @if (chegouAoFim()) {
+      <div class="aviso-fim">
+        <div class="fim-linha"></div>
+        <p>VOCÊ CHEGOU AO FIM DO CATÁLOGO</p>
+      </div>
+    }
+
+  </main>
+
+  <!-- ===== RODAPÉ (componente compartilhado) ===== -->
+  <app-rodape></app-rodape>
+
+</div>

@@ -1,13 +1,20 @@
 /* =============================================
    ESTILOS — PÁGINA DE COLEÇÃO
-   Mesmo estilo da home pra manter consistencia
+   Mesmo estilo da home pra manter consistencia.
+   As cores vêm das variáveis globais (styles.scss),
+   então o modo escuro também funciona aqui.
    ============================================= */
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;600&display=swap');
 
 .colecao-wrapper {
   min-height: 100vh;
-  background-color: #fff;
+  background-color: var(--cor-fundo);
+  display: flex;
+  flex-direction: column;
+}
+
+/* o <main> ocupa o espaço todo entre a navbar e o rodapé */
+main {
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
@@ -19,8 +26,8 @@
   align-items: center;
   padding: 0 48px;
   height: 72px;
-  border-bottom: 1px solid #e8e8e8;
-  background-color: #fff;
+  border-bottom: 1px solid var(--cor-borda);
+  background-color: var(--cor-fundo);
   position: sticky;
   top: 0;
   z-index: 999;
@@ -30,7 +37,7 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.6rem;
   letter-spacing: 8px;
-  color: #000;
+  color: var(--cor-texto);
   font-weight: 400;
 }
 
@@ -39,18 +46,67 @@
   gap: 24px;
 }
 
+.navbar-acoes {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .nav-link {
   font-size: 0.6rem;
   letter-spacing: 3px;
-  color: #000;
+  color: var(--cor-texto);
   font-weight: 600;
   opacity: 0.6;
   transition: opacity 0.25s ease;
   cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .nav-link:hover {
   opacity: 1;
+}
+
+/* Botão de tema (lua/sol) — igual ao das outras telas */
+.btn-tema {
+  background: transparent;
+  border: 1px solid var(--cor-borda);
+  color: var(--cor-texto);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.25s ease;
+}
+
+.btn-tema:hover {
+  border-color: var(--cor-azul);
+}
+
+/* link do carrinho com a bolinha verde do contador */
+.nav-carrinho {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.carrinho-badge {
+  background-color: var(--cor-verde);
+  color: #fff;
+  font-size: 0.55rem;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
 }
 
 /* ===== HERO DA COLECAO ===== */
@@ -121,7 +177,7 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--cor-borda-clara);
   padding-bottom: 20px;
   margin-bottom: 48px;
 }
@@ -131,13 +187,13 @@
   font-size: 1.5rem;
   font-weight: 400;
   letter-spacing: 4px;
-  color: #000;
+  color: var(--cor-texto);
 }
 
 .produtos-qtd {
   font-size: 0.6rem;
   letter-spacing: 3px;
-  color: #bbb;
+  color: var(--cor-texto-apagado);
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -183,7 +239,10 @@
   transition: opacity 0.3s ease;
 }
 
-.produto-overlay.visivel {
+/* o overlay aparece no hover OU quando o botão dentro dele
+   recebe o foco do teclado (acessibilidade) */
+.produto-overlay.visivel,
+.produto-overlay:focus-within {
   opacity: 1;
 }
 
@@ -205,6 +264,13 @@
   color: #000;
 }
 
+/* estado "✓ ADICIONADO" — fica verde por 1 segundo depois do clique */
+.btn-ver.adicionado {
+  background-color: var(--cor-verde);
+  border-color: var(--cor-verde);
+  color: #fff;
+}
+
 /* Informacoes do produto */
 .produto-info {
   padding: 0 4px;
@@ -213,7 +279,7 @@
 .produto-categoria {
   font-size: 0.55rem;
   letter-spacing: 3px;
-  color: #bbb;
+  color: var(--cor-texto-apagado);
   font-family: 'Montserrat', sans-serif;
   display: block;
   margin-bottom: 6px;
@@ -224,39 +290,16 @@
   font-size: 1.1rem;
   font-weight: 400;
   letter-spacing: 2px;
-  color: #000;
+  color: var(--cor-texto);
   margin-bottom: 8px;
 }
 
+/* preço em verde (paleta do TCC), estilo loja.
+   A variável "verde-texto" tem contraste bom nos dois temas */
 .produto-preco {
   font-size: 0.7rem;
-  color: #555;
-  letter-spacing: 1px;
-  font-family: 'Montserrat', sans-serif;
-}
-
-/* ===== RODAPÉ ===== */
-.rodape {
-  border-top: 1px solid #eee;
-  padding: 32px 48px;
-}
-
-.rodape-conteudo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.rodape-marca {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  letter-spacing: 5px;
-  color: #000;
-}
-
-.rodape-info {
-  font-size: 0.6rem;
-  color: #bbb;
+  color: var(--cor-verde-texto);
+  font-weight: 600;
   letter-spacing: 1px;
   font-family: 'Montserrat', sans-serif;
 }
@@ -269,7 +312,7 @@
   min-height: 100vh;
   font-family: 'Montserrat', sans-serif;
   font-size: 0.75rem;
-  color: #bbb;
+  color: var(--cor-texto-apagado);
   letter-spacing: 3px;
 }
 
@@ -284,5 +327,4 @@
   .hero-colecao { background-attachment: scroll; } /* parallax off no mobile */
   .produtos-section { padding: 40px 20px; }
   .produtos-grid { grid-template-columns: 1fr; }
-  .rodape-conteudo { flex-direction: column; gap: 12px; text-align: center; }
 }

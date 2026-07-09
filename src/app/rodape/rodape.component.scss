@@ -1,0 +1,91 @@
+/* =============================================
+   ESTILOS — RODAPÉ
+   Mesmo visual minimalista das outras telas.
+   As cores vêm das variáveis globais (styles.scss),
+   então o rodapé também respeita o modo escuro.
+   ============================================= */
+
+.rodape {
+  border-top: 1px solid var(--cor-borda-clara);
+  padding: 40px 48px;
+  background-color: var(--cor-fundo);
+}
+
+.rodape-conteudo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.rodape-marca {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  letter-spacing: 5px;
+  color: var(--cor-texto);
+  margin-bottom: 10px;
+}
+
+.rodape-info {
+  font-size: 0.6rem;
+  color: var(--cor-texto-apagado);
+  letter-spacing: 1px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ===== REDES SOCIAIS ===== */
+.rodape-social {
+  text-align: right;
+}
+
+.social-titulo {
+  font-size: 0.58rem;
+  letter-spacing: 4px;
+  color: var(--cor-texto-apagado);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.social-lista {
+  list-style: none; /* tira as bolinhas da lista */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.social-link {
+  font-size: 0.62rem;
+  letter-spacing: 1.5px;
+  color: var(--cor-texto-suave);
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+/* o @ da rede fica em azul (paleta do TCC) */
+.social-arroba {
+  color: var(--cor-azul);
+}
+
+/* ao passar o mouse o link inteiro fica azul */
+.social-link:hover {
+  color: var(--cor-azul);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 640px) {
+  .rodape {
+    padding: 32px 20px;
+  }
+
+  .rodape-conteudo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .rodape-social {
+    text-align: center;
+  }
+}

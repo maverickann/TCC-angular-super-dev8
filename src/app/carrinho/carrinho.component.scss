@@ -1,0 +1,406 @@
+/* =============================================
+   ESTILOS — PÁGINA DO CARRINHO
+   Layout em duas colunas (itens + resumo), parecido
+   com e-commerce tipo Kabum mas mantendo o visual
+   minimalista do site. Cores vindas das variáveis
+   globais = modo escuro funciona automaticamente.
+   ============================================= */
+
+.carrinho-wrapper {
+  min-height: 100vh;
+  background-color: var(--cor-fundo);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ===== NAVBAR (mesmo estilo da home) ===== */
+.navbar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 48px;
+  height: 72px;
+  border-bottom: 1px solid var(--cor-borda);
+  background-color: var(--cor-fundo);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar-nav { grid-column: 1; display: flex; gap: 24px; }
+.navbar-logo { grid-column: 2; text-align: center; }
+
+.logo-texto {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  letter-spacing: 8px;
+  color: var(--cor-texto);
+  font-weight: 400;
+}
+
+.navbar-acoes {
+  grid-column: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.nav-link {
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: var(--cor-texto);
+  font-weight: 600;
+  opacity: 0.6;
+  transition: opacity 0.25s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.nav-link:hover { opacity: 1; }
+
+.btn-tema {
+  background: transparent;
+  border: 1px solid var(--cor-borda);
+  color: var(--cor-texto);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.25s ease;
+}
+
+.btn-tema:hover { border-color: var(--cor-azul); }
+
+/* ===== CABEÇALHO DA PÁGINA ===== */
+.carrinho-section {
+  flex: 1;
+  padding: 64px 48px;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.carrinho-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--cor-borda-clara);
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+}
+
+.carrinho-titulo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 4px;
+  color: var(--cor-texto);
+}
+
+.carrinho-qtd {
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: var(--cor-texto-apagado);
+}
+
+/* ===== DUAS COLUNAS: ITENS + RESUMO ===== */
+.carrinho-conteudo {
+  display: grid;
+  grid-template-columns: 1fr 320px; /* esquerda flexível, resumo fixo */
+  gap: 40px;
+  align-items: start;
+}
+
+/* ===== LISTA DE ITENS ===== */
+
+/* o cabeçalho e cada linha usam as mesmas colunas de grid,
+   assim tudo fica alinhado como uma tabela */
+.itens-cabecalho,
+.item-linha {
+  display: grid;
+  grid-template-columns: 1fr 110px 100px 100px 32px;
+  gap: 12px;
+  align-items: center;
+}
+
+.itens-cabecalho {
+  font-size: 0.55rem;
+  letter-spacing: 2px;
+  color: var(--cor-texto-apagado);
+  font-weight: 600;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--cor-borda-clara);
+}
+
+.item-linha {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--cor-borda-clara);
+}
+
+.item-produto {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.item-foto {
+  width: 56px;
+  height: 72px;
+  background-size: cover;
+  background-position: center top;
+  background-color: #111;
+  flex-shrink: 0;
+}
+
+.item-categoria {
+  font-size: 0.5rem;
+  letter-spacing: 2px;
+  color: var(--cor-texto-apagado);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.item-nome {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  color: var(--cor-texto);
+}
+
+/* controles de quantidade (− 1 +) */
+.controle-qtd {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-qtd {
+  width: 26px;
+  height: 26px;
+  background: transparent;
+  border: 1px solid var(--cor-borda);
+  color: var(--cor-texto);
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.btn-qtd:hover {
+  border-color: var(--cor-azul);
+  color: var(--cor-azul);
+}
+
+.qtd-numero {
+  font-size: 0.75rem;
+  color: var(--cor-texto);
+  min-width: 20px;
+  text-align: center;
+}
+
+.item-preco {
+  font-size: 0.7rem;
+  color: var(--cor-texto-suave);
+}
+
+/* subtotal de cada linha em verde (paleta do TCC).
+   A variável "verde-texto" tem contraste bom nos dois temas */
+.item-subtotal {
+  font-size: 0.72rem;
+  color: var(--cor-verde-texto);
+  font-weight: 600;
+}
+
+.btn-remover {
+  background: transparent;
+  border: none;
+  color: var(--cor-texto-apagado);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  line-height: 1;
+}
+
+.btn-remover:hover { color: var(--cor-erro); }
+
+/* ===== RESUMO DO PEDIDO (coluna da direita) ===== */
+.resumo {
+  background-color: var(--cor-fundo-destaque);
+  border: 1px solid var(--cor-borda-clara);
+  padding: 28px 24px;
+  position: sticky;
+  top: 96px; /* fica "grudado" na tela quando rola, abaixo da navbar */
+}
+
+.resumo-titulo {
+  font-size: 0.65rem;
+  letter-spacing: 3px;
+  color: var(--cor-texto);
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.resumo-linha {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--cor-texto-suave);
+  margin-bottom: 14px;
+  letter-spacing: 1px;
+}
+
+.frete-gratis {
+  color: var(--cor-verde-texto);
+  font-weight: 600;
+}
+
+/* dica de quanto falta pro frete grátis (em azul) */
+.dica-frete {
+  font-size: 0.6rem;
+  color: var(--cor-azul);
+  letter-spacing: 0.5px;
+  margin-bottom: 14px;
+}
+
+.resumo-divisor {
+  height: 1px;
+  background-color: var(--cor-borda);
+  margin: 16px 0;
+}
+
+.resumo-total {
+  font-size: 0.85rem;
+  color: var(--cor-texto);
+  font-weight: 600;
+}
+
+/* aviso vermelho quando tenta finalizar sem login
+   (a variável --cor-erro tem um tom legível em cada tema) */
+.aviso-login {
+  font-size: 0.62rem;
+  color: var(--cor-erro);
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+  margin: 12px 0;
+}
+
+/* botão principal em verde, estilo "comprar" de e-commerce */
+.btn-finalizar {
+  width: 100%;
+  background-color: var(--cor-verde);
+  border: none;
+  color: #fff;
+  padding: 14px;
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: opacity 0.25s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.btn-finalizar:hover { opacity: 0.85; }
+
+.btn-continuar-resumo {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--cor-azul);
+  color: var(--cor-azul);
+  padding: 12px;
+  font-size: 0.55rem;
+  letter-spacing: 2px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.25s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* no hover o texto pega a cor do fundo da página
+   (branco no claro, escuro no escuro — sempre dá pra ler) */
+.btn-continuar-resumo:hover {
+  background-color: var(--cor-azul);
+  color: var(--cor-fundo);
+}
+
+/* ===== CARRINHO VAZIO / COMPRA FINALIZADA ===== */
+.carrinho-vazio,
+.compra-sucesso {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.vazio-icone {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.sucesso-icone {
+  font-size: 2.5rem;
+  color: var(--cor-verde);
+  margin-bottom: 16px;
+}
+
+.vazio-titulo,
+.sucesso-titulo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  letter-spacing: 4px;
+  color: var(--cor-texto);
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.vazio-texto,
+.sucesso-texto {
+  font-size: 0.7rem;
+  color: var(--cor-texto-apagado);
+  letter-spacing: 1px;
+  margin-bottom: 32px;
+}
+
+.btn-continuar {
+  background: transparent;
+  border: 1px solid var(--cor-texto);
+  color: var(--cor-texto);
+  padding: 12px 32px;
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.btn-continuar:hover {
+  background-color: var(--cor-texto);
+  color: var(--cor-fundo);
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 1024px) {
+  /* o resumo desce pra baixo da lista no tablet/celular */
+  .carrinho-conteudo { grid-template-columns: 1fr; }
+  .resumo { position: static; }
+}
+
+@media (max-width: 640px) {
+  .navbar { padding: 0 20px; }
+  .navbar-nav { display: none; }
+  .carrinho-section { padding: 40px 20px; }
+
+  /* em tela pequena escondo o cabeçalho e o preço unitário
+     pra caber tudo (o subtotal já mostra o valor) */
+  .itens-cabecalho { display: none; }
+  .item-linha { grid-template-columns: 1fr auto; row-gap: 12px; }
+  .col-preco { display: none; }
+}

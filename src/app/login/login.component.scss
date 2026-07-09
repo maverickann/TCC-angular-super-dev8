@@ -1,14 +1,40 @@
 /* =============================================
    ESTILOS — TELA DE LOGIN
    Inspiração: marcas de moda de luxo
-   Paleta: só preto, branco e tons de cinza
+   As cores vêm das variáveis globais (styles.scss),
+   então o modo escuro também funciona aqui.
    ============================================= */
 
 /* Layout dividido em dois painéis lado a lado */
 .login-page {
   display: flex;
   min-height: 100vh;
-  background-color: #fff;
+  background-color: var(--cor-fundo);
+  position: relative; /* pro botão de tema flutuante se posicionar */
+}
+
+/* Botão de tema flutuante no canto de cima (lua/sol) */
+.btn-tema-login {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  background: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  color: var(--cor-texto);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.25s ease;
+}
+
+.btn-tema-login:hover {
+  border-color: var(--cor-azul);
 }
 
 /* ===== PAINEL ESQUERDO (DECORATIVO) ===== */
@@ -68,7 +94,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
+  background-color: var(--cor-fundo);
   padding: 60px 40px;
 }
 
@@ -88,7 +114,7 @@
   font-size: 2.8rem;
   font-weight: 400;
   letter-spacing: 10px;
-  color: #000;
+  color: var(--cor-texto);
   margin-bottom: 6px;
 }
 
@@ -96,7 +122,7 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 0.55rem;
   letter-spacing: 5px;
-  color: #aaa;
+  color: var(--cor-texto-apagado);
   font-weight: 300;
 }
 
@@ -116,7 +142,7 @@
 .campo label {
   font-size: 0.58rem;
   letter-spacing: 4px;
-  color: #999;
+  color: var(--cor-texto-apagado);
   font-weight: 600;
 }
 
@@ -124,22 +150,23 @@
 .campo input {
   background: transparent;
   border: none;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--cor-borda);
   padding: 10px 0;
   font-size: 0.9rem;
-  color: #000;
+  color: var(--cor-texto);
   outline: none;
   transition: border-color 0.3s ease;
   width: 100%;
 }
 
+/* quando o campo está selecionado, a linha fica azul (paleta do TCC) */
 .campo input:focus {
-  border-bottom-color: #000;
+  border-bottom-color: var(--cor-azul);
 }
 
 /* Placeholder mais suave */
 .campo input::placeholder {
-  color: #ccc;
+  color: var(--cor-texto-apagado);
   font-size: 0.85rem;
 }
 
@@ -160,7 +187,7 @@
   right: 0;
   background: none;
   border: none;
-  color: #bbb;
+  color: var(--cor-texto-apagado);
   font-size: 0.7rem;
   cursor: pointer;
   padding: 4px;
@@ -168,7 +195,7 @@
 }
 
 .btn-olho:hover {
-  color: #000;
+  color: var(--cor-texto);
 }
 
 /* ===== MENSAGEM DE ERRO ===== */
@@ -184,16 +211,19 @@
   font-size: 1rem;
 }
 
+/* a variável --cor-erro tem um tom de vermelho legível em cada tema */
 .erro-texto {
   font-size: 0.72rem;
-  color: #c0392b;
+  color: var(--cor-erro);
   letter-spacing: 1px;
 }
 
 /* ===== BOTÃO ENTRAR ===== */
+/* uso as variáveis "invertidas": fundo com a cor do texto
+   e texto com a cor do fundo — funciona nos dois temas */
 .btn-entrar {
-  background-color: #000;
-  color: #fff;
+  background-color: var(--cor-texto);
+  color: var(--cor-fundo);
   border: none;
   padding: 16px;
   font-size: 0.6rem;
@@ -205,12 +235,26 @@
   margin-top: 8px;
 }
 
+/* no hover o botão fica azul (paleta do TCC) e o texto pega
+   a cor do fundo da página — sempre legível nos dois temas */
 .btn-entrar:hover {
-  background-color: #222;
+  background-color: var(--cor-azul);
+  color: var(--cor-fundo);
 }
 
-.btn-entrar:active {
-  background-color: #444;
+/* Link pra voltar pra home sem fazer login */
+.link-voltar {
+  text-align: center;
+  font-size: 0.58rem;
+  letter-spacing: 3px;
+  color: var(--cor-texto-apagado);
+  cursor: pointer;
+  transition: color 0.25s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.link-voltar:hover {
+  color: var(--cor-azul);
 }
 
 /* ===== RODAPÉ ===== */
@@ -218,7 +262,7 @@
   text-align: center;
   margin-top: 48px;
   font-size: 0.58rem;
-  color: #ccc;
+  color: var(--cor-texto-apagado);
   letter-spacing: 2px;
 }
 
