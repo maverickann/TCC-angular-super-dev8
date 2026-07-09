@@ -62,6 +62,18 @@
   <!-- ===== GRID DE PRODUTOS ===== -->
   <section class="produtos-section">
 
+    <!-- ===== FILTRO DE ESTAÇÕES ===== -->
+    <!-- Links pra trocar de estação sem precisar voltar pra home.
+         O routerLinkActive coloca a classe "filtro-ativo" sozinho
+         no link da estação que está aberta no momento -->
+    <nav class="filtro-estacoes" aria-label="Filtrar por estação">
+      <span class="filtro-rotulo">FILTRAR POR ESTAÇÃO:</span>
+      <a routerLink="/colecao/outono"    routerLinkActive="filtro-ativo" class="filtro-link">OUTONO</a>
+      <a routerLink="/colecao/inverno"   routerLinkActive="filtro-ativo" class="filtro-link">INVERNO</a>
+      <a routerLink="/colecao/primavera" routerLinkActive="filtro-ativo" class="filtro-link">PRIMAVERA</a>
+      <a routerLink="/colecao/verao"     routerLinkActive="filtro-ativo" class="filtro-link">VERÃO</a>
+    </nav>
+
     <div class="produtos-header">
       <h2 class="produtos-titulo">{{ estacaoAtual.subtitulo }}</h2>
       <!-- Mostra quantas pecas tem na colecao -->

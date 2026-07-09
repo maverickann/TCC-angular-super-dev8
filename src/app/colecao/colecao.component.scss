@@ -173,6 +173,46 @@ main {
   padding: 64px 48px;
 }
 
+/* ===== FILTRO DE ESTAÇÕES ===== */
+.filtro-estacoes {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap; /* quebra a linha no celular */
+  margin-bottom: 40px;
+}
+
+.filtro-rotulo {
+  font-size: 0.55rem;
+  letter-spacing: 3px;
+  color: var(--cor-texto-apagado);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.filtro-link {
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: var(--cor-texto);
+  opacity: 0.5;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  padding: 6px 14px;
+  border: 1px solid transparent; /* borda invisível pro layout não pular */
+  transition: all 0.25s ease;
+}
+
+.filtro-link:hover {
+  opacity: 1;
+}
+
+/* estação selecionada: ganha borda e cor azul (paleta do TCC) */
+.filtro-link.filtro-ativo {
+  opacity: 1;
+  border-color: var(--cor-azul);
+  color: var(--cor-azul);
+}
+
 .produtos-header {
   display: flex;
   justify-content: space-between;

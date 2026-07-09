@@ -53,9 +53,9 @@
         <h1 class="catalogo-titulo">CATÁLOGO COMPLETO</h1>
         <p class="catalogo-subtitulo">Todas as peças, de todas as estações</p>
       </div>
-      <!-- mostra quantos produtos já carregaram na tela
+      <!-- mostra quantos produtos já carregaram do total da loja
            (produtosVisiveis é um signal, por isso os parênteses) -->
-      <span class="catalogo-qtd">{{ produtosVisiveis().length }} PEÇAS EXIBIDAS</span>
+      <span class="catalogo-qtd">{{ produtosVisiveis().length }} DE {{ totalPecas }} PEÇAS</span>
     </div>
 
     <!-- ===== GRID DE PRODUTOS ===== -->
@@ -71,7 +71,8 @@
           <div class="produto-imagem" [style.background-image]="'url(' + produto.imagem + ')'"></div>
 
           <div class="produto-info">
-            <span class="produto-categoria">{{ produto.categoria }}</span>
+            <!-- categoria + de qual estação a peça é -->
+            <span class="produto-categoria">{{ produto.categoria }} · {{ produto.estacao }}</span>
             <!-- h2 porque o título da página é h1 (a ordem dos títulos
                  não pode pular níveis, senão o leitor de tela se perde) -->
             <h2 class="produto-nome">{{ produto.nome }}</h2>

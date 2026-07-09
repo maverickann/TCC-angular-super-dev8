@@ -3,13 +3,17 @@ import { RouterLink } from '@angular/router'; // pros links de navegação no HT
 import { CarrinhoService } from '../servicos/carrinho.service';
 import { TemaService } from '../servicos/tema.service';
 import { RodapeComponent } from '../rodape/rodape.component';
+// os produtos vêm do mesmo arquivo que a página de coleção usa
+import { CATALOGO_LOJA } from '../servicos/produtos-loja';
 
-// Tipagem simples de um produto do catálogo
+// Produto do catálogo = produto da loja + o nome da estação dele
+// (a estação aparece no cantinho de cada card)
 interface ProdutoCatalogo {
   nome: string;
   categoria: string;
   preco: number;
   imagem: string;
+  estacao: string;
 }
 
 // =============================================
@@ -32,30 +36,11 @@ interface ProdutoCatalogo {
 })
 export class CatalogoComponent implements OnInit {
 
-  // Peças base do catálogo (reaproveitei as fotos das coleções).
-  // Como o TCC ainda não tem banco de dados, essa lista serve
-  // de "estoque" pra gerar o catálogo completo logo abaixo.
-  private pecasBase: ProdutoCatalogo[] = [
-    { nome: 'Vestido Midi Linho',     categoria: 'Vestidos',  preco: 349.90,  imagem: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=500&q=80&fit=crop' },
-    { nome: 'Blusa Transparente',     categoria: 'Blusas',    preco: 189.90,  imagem: 'https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=500&q=80&fit=crop' },
-    { nome: 'Short Alfaiataria',      categoria: 'Shorts',    preco: 229.90,  imagem: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=500&q=80&fit=crop' },
-    { nome: 'Conjunto Praia Luxo',    categoria: 'Conjuntos', preco: 479.90,  imagem: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=500&q=80&fit=crop' },
-    { nome: 'Vestido Midi Floral',    categoria: 'Vestidos',  preco: 389.90,  imagem: 'https://images.unsplash.com/photo-1594938298603-c8148c4b4de3?w=500&q=80&fit=crop' },
-    { nome: 'Camisa Linho',           categoria: 'Camisas',   preco: 259.90,  imagem: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&q=80&fit=crop' },
-    { nome: 'Blazer Caramelo',        categoria: 'Blazers',   preco: 589.90,  imagem: 'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=500&q=80&fit=crop' },
-    { nome: 'Calça Wide Leg',         categoria: 'Calças',    preco: 329.90,  imagem: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=500&q=80&fit=crop' },
-    { nome: 'Cardigan Tricot',        categoria: 'Malhas',    preco: 289.90,  imagem: 'https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500&q=80&fit=crop' },
-    { nome: 'Trench Coat',            categoria: 'Casacos',   preco: 749.90,  imagem: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=500&q=80&fit=crop' },
-    { nome: 'Blusa Veludo',           categoria: 'Blusas',    preco: 219.90,  imagem: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=500&q=80&fit=crop' },
-    { nome: 'Saia Midi',              categoria: 'Saias',     preco: 279.90,  imagem: 'https://images.unsplash.com/photo-1485125639709-a60c3a500bf1?w=500&q=80&fit=crop' },
-    { nome: 'Casaco Wool Premium',    categoria: 'Casacos',   preco: 899.90,  imagem: 'https://images.unsplash.com/photo-1544441893-675973e31985?w=500&q=80&fit=crop' },
-    { nome: 'Sobretudo Clássico',     categoria: 'Casacos',   preco: 1099.90, imagem: 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=500&q=80&fit=crop' },
-    { nome: 'Blusa Gola Alta Seda',   categoria: 'Blusas',    preco: 279.90,  imagem: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=500&q=80&fit=crop' },
-    { nome: 'Saia Plissada',          categoria: 'Saias',     preco: 259.90,  imagem: 'https://images.unsplash.com/photo-1485125639709-a60c3a500bf1?w=500&q=80&fit=crop' }
-  ];
-
-  // catálogo completo (gerado no ngOnInit)
+  // catálogo completo (montado no ngOnInit a partir da loja)
   private catalogoCompleto: ProdutoCatalogo[] = [];
+
+  // total de peças da loja — aparece no cabeçalho ("X DE Y PEÇAS")
+  totalPecas = 0;
 
   // Sobre o "signal": é o jeito novo do Angular de guardar um valor
   // que atualiza a tela SOZINHO quando muda. Precisei usar porque os
@@ -65,7 +50,7 @@ export class CatalogoComponent implements OnInit {
   produtosVisiveis = signal<ProdutoCatalogo[]>([]);
 
   // controles da rolagem infinita
-  itensPorPagina = 12;              // quantos produtos entram por "leva"
+  itensPorPagina = 8;               // quantos produtos entram por "leva"
   carregando = signal(false);       // true enquanto o spinner aparece
   chegouAoFim = signal(false);      // true quando não tem mais produto pra mostrar
 
@@ -79,21 +64,24 @@ export class CatalogoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Monto o catálogo completo: cada peça base ganha 4 variações
-    // de cor (as cores da paleta do TCC), então 16 peças viram 64.
-    // Assim a rolagem infinita tem bastante conteúdo pra carregar.
-    const cores = ['Preto', 'Branco', 'Azul', 'Verde'];
+    // Monto o catálogo juntando os produtos das 4 estações
+    // (TODOS os itens disponíveis da loja aparecem aqui).
+    // O Object.keys me dá as chaves: 'verao', 'outono', etc.
+    for (const chave of Object.keys(CATALOGO_LOJA)) {
+      const dadosDaEstacao = CATALOGO_LOJA[chave];
 
-    for (const cor of cores) {
-      for (const peca of this.pecasBase) {
+      for (const produto of dadosDaEstacao.produtos) {
         this.catalogoCompleto.push({
-          nome: peca.nome + ' — ' + cor, // ex: "Vestido Midi Linho — Azul"
-          categoria: peca.categoria,
-          preco: peca.preco,
-          imagem: peca.imagem
+          nome: produto.nome,
+          categoria: produto.categoria,
+          preco: produto.preco,
+          imagem: produto.imagem,
+          estacao: dadosDaEstacao.titulo // ex: 'VERÃO' — aparece no card
         });
       }
     }
+
+    this.totalPecas = this.catalogoCompleto.length;
 
     // A primeira leva entra NA HORA, sem esperar o setTimeout —
     // assim a página já abre com produtos na tela.
