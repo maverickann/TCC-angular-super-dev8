@@ -7,15 +7,41 @@
 <div class="colecao-wrapper" *ngIf="estacaoAtual">
 
   <!-- ===== NAVBAR SIMPLES ===== -->
+  <!-- Usei routerLink (e não (click)) nos links porque assim eles viram
+       links de verdade, que funcionam com a tecla Tab e com leitor de tela -->
   <header class="navbar">
     <div class="navbar-logo">
-      <span class="logo-texto" (click)="voltarHome()" style="cursor: pointer">TESSILE</span>
+      <a class="logo-texto" routerLink="/home">URBAN VILUZ</a>
     </div>
     <nav class="navbar-nav">
       <!-- Botao de voltar pra home -->
-      <a class="nav-link" (click)="voltarHome()">← VOLTAR</a>
+      <a class="nav-link" routerLink="/home">← VOLTAR</a>
     </nav>
+
+    <div class="navbar-acoes">
+      <!-- Botão que alterna entre modo claro e escuro -->
+      <button class="btn-tema" (click)="tema.alternarTema()"
+        [attr.aria-label]="tema.escuro ? 'Mudar para modo claro' : 'Mudar para modo escuro'"
+        [title]="tema.escuro ? 'Mudar para modo claro' : 'Mudar para modo escuro'">
+        {{ tema.escuro ? '☀' : '☾' }}
+      </button>
+
+      <!-- Link do carrinho com o contador de itens -->
+      <a class="nav-link nav-carrinho" routerLink="/carrinho">
+        CARRINHO
+        <span class="carrinho-badge" *ngIf="carrinho.totalItens() > 0">{{ carrinho.totalItens() }}</span>
+      </a>
+    </div>
   </header>
+
+  <!-- Aviso invisível pro leitor de tela: anuncia quando um produto
+       entra no carrinho (o aria-live faz o anúncio automático) -->
+  <p class="sr-only" aria-live="polite">
+    <span *ngIf="produtoAdicionado()">Produto adicionado ao carrinho</span>
+  </p>
+
+  <!-- <main> marca o conteúdo principal da página (acessibilidade) -->
+  <main>
 
   <!-- ===== HERO DA ESTACAO ===== -->
   <!-- A imagem de fundo muda de acordo com a estacao (binding dinamico) -->
@@ -25,7 +51,7 @@
   >
     <div class="hero-overlay"></div>
     <div class="hero-conteudo">
-      <p class="hero-eyebrow">TESSILE · 2025</p>
+      <p class="hero-eyebrow">URBAN VILUZ · 2026</p>
       <!-- Titulo dinamico: VERÃO / INVERNO etc -->
       <h1 class="hero-titulo">{{ estacaoAtual.titulo }}</h1>
       <p class="hero-subtitulo">{{ estacaoAtual.descricao }}</p>
@@ -35,6 +61,18 @@
 
   <!-- ===== GRID DE PRODUTOS ===== -->
   <section class="produtos-section">
+
+    <!-- ===== FILTRO DE ESTAÇÕES ===== -->
+    <!-- Links pra trocar de estação sem precisar voltar pra home.
+         O routerLinkActive coloca a classe "filtro-ativo" sozinho
+         no link da estação que está aberta no momento -->
+    <nav class="filtro-estacoes" aria-label="Filtrar por estação">
+      <span class="filtro-rotulo">FILTRAR POR ESTAÇÃO:</span>
+      <a routerLink="/colecao/outono"    routerLinkActive="filtro-ativo" class="filtro-link">OUTONO</a>
+      <a routerLink="/colecao/inverno"   routerLinkActive="filtro-ativo" class="filtro-link">INVERNO</a>
+      <a routerLink="/colecao/primavera" routerLinkActive="filtro-ativo" class="filtro-link">PRIMAVERA</a>
+      <a routerLink="/colecao/verao"     routerLinkActive="filtro-ativo" class="filtro-link">VERÃO</a>
+    </nav>
 
     <div class="produtos-header">
       <h2 class="produtos-titulo">{{ estacaoAtual.subtitulo }}</h2>
@@ -59,7 +97,14 @@
         >
           <!-- Overlay escuro que aparece quando passa o mouse -->
           <div class="produto-overlay" [class.visivel]="produtoHover === produto.id">
-            <button class="btn-ver">VER DETALHES</button>
+            <!-- Botão que coloca a peça no carrinho.
+                 O texto vira "✓ ADICIONADO" por 1 segundo depois do clique -->
+            <button
+              class="btn-ver"
+              [class.adicionado]="produtoAdicionado() === produto.id"
+              (click)="adicionarAoCarrinho(produto)">
+              {{ produtoAdicionado() === produto.id ? '✓ ADICIONADO' : 'ADICIONAR AO CARRINHO' }}
+            </button>
           </div>
         </div>
 
@@ -77,13 +122,10 @@
 
   </section>
 
-  <!-- ===== RODAPÉ ===== -->
-  <footer class="rodape">
-    <div class="rodape-conteudo">
-      <p class="rodape-marca">TESSILE</p>
-      <p class="rodape-info">© 2025 · TCC Engenharia Têxtil · Todos os direitos reservados</p>
-    </div>
-  </footer>
+  </main>
+
+  <!-- ===== RODAPÉ (componente compartilhado com as redes sociais) ===== -->
+  <app-rodape></app-rodape>
 
 </div>
 

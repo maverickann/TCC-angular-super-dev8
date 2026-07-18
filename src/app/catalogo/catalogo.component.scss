@@ -1,0 +1,296 @@
+/* =============================================
+   ESTILOS — PÁGINA DE CATÁLOGO
+   Mesmo visual das outras telas. As cores vêm das
+   variáveis globais, então o modo escuro funciona aqui.
+   ============================================= */
+
+.catalogo-wrapper {
+  min-height: 100vh;
+  background-color: var(--cor-fundo);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== NAVBAR (mesmo estilo da home) ===== */
+.navbar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 0 48px;
+  height: 72px;
+  border-bottom: 1px solid var(--cor-borda);
+  background-color: var(--cor-fundo);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar-nav {
+  grid-column: 1;
+  display: flex;
+  gap: 24px;
+}
+
+.navbar-logo {
+  grid-column: 2;
+  text-align: center;
+}
+
+.logo-texto {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  letter-spacing: 5px; /* nome maior, espacamento menor pra caber */
+  color: var(--cor-texto);
+  font-weight: 400;
+}
+
+.navbar-acoes {
+  grid-column: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+}
+
+.nav-link {
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: var(--cor-texto);
+  font-weight: 600;
+  opacity: 0.6;
+  transition: opacity 0.25s ease;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  opacity: 1;
+}
+
+/* Botão de tema (lua/sol) — redondinho e discreto */
+.btn-tema {
+  background: transparent;
+  border: 1px solid var(--cor-borda);
+  color: var(--cor-texto);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.25s ease;
+}
+
+.btn-tema:hover {
+  border-color: var(--cor-azul);
+}
+
+/* link do carrinho com a bolinha do contador */
+.nav-carrinho {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.carrinho-badge {
+  background-color: var(--cor-verde);
+  color: #fff;
+  font-size: 0.55rem;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  font-weight: 600;
+}
+
+/* ===== CABEÇALHO DO CATÁLOGO ===== */
+.catalogo-section {
+  flex: 1;
+  padding: 64px 48px;
+}
+
+.catalogo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid var(--cor-borda-clara);
+  padding-bottom: 20px;
+  margin-bottom: 48px;
+}
+
+.catalogo-titulo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 4px;
+  color: var(--cor-texto);
+  margin-bottom: 6px;
+}
+
+.catalogo-subtitulo {
+  font-size: 0.65rem;
+  color: var(--cor-texto-apagado);
+  letter-spacing: 2px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.catalogo-qtd {
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: var(--cor-texto-apagado);
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ===== GRID DE PRODUTOS ===== */
+.catalogo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+
+/* Foto em preto e branco que ganha cor quando passa o mouse
+   (mesmo efeito usado nas páginas de coleção) */
+.produto-imagem {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background-size: cover;
+  background-position: center top;
+  background-color: #111;
+  margin-bottom: 16px;
+  filter: grayscale(100%);
+  transition: filter 0.5s ease;
+}
+
+.produto-card:hover .produto-imagem {
+  filter: grayscale(0%);
+}
+
+.produto-info {
+  padding: 0 4px;
+}
+
+.produto-categoria {
+  font-size: 0.55rem;
+  letter-spacing: 3px;
+  color: var(--cor-texto-apagado);
+  font-family: 'Montserrat', sans-serif;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.produto-nome {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: var(--cor-texto);
+  margin-bottom: 8px;
+}
+
+/* preço em verde, estilo loja (paleta do TCC).
+   Uso a variável "verde-texto", que tem um tom com contraste
+   bom pra leitura tanto no tema claro quanto no escuro */
+.produto-preco {
+  font-size: 0.78rem;
+  color: var(--cor-verde-texto);
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 12px;
+}
+
+/* Botão de adicionar ao carrinho: borda azul que
+   preenche de verde quando o item é adicionado */
+.btn-carrinho {
+  width: 100%;
+  background: transparent;
+  border: 1px solid var(--cor-azul);
+  color: var(--cor-azul);
+  padding: 10px 12px;
+  font-size: 0.55rem;
+  letter-spacing: 2px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* no hover inverte: fundo azul e o texto pega a cor do fundo da página
+   (branco no claro, escuro no escuro — sempre dá pra ler) */
+.btn-carrinho:hover {
+  background-color: var(--cor-azul);
+  color: var(--cor-fundo);
+}
+
+/* estado "✓ ADICIONADO" (fica verde por 1 segundo) */
+.btn-carrinho.adicionado {
+  background-color: var(--cor-verde);
+  border-color: var(--cor-verde);
+  color: #fff;
+}
+
+/* ===== AVISOS DA ROLAGEM INFINITA ===== */
+.aviso-carregando {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 48px 0;
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: var(--cor-texto-apagado);
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Bolinha que gira enquanto carrega.
+   O truque: um círculo com a borda quase toda transparente
+   e só um pedaço azul, girando sem parar com o animation. */
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--cor-borda);
+  border-top-color: var(--cor-azul);
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.aviso-fim {
+  text-align: center;
+  padding: 48px 0;
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: var(--cor-texto-apagado);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.fim-linha {
+  width: 40px;
+  height: 1px;
+  background-color: var(--cor-borda);
+  margin: 0 auto 16px;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 1024px) {
+  .catalogo-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .navbar { padding: 0 20px; }
+  .navbar-nav { display: none; }
+  .catalogo-section { padding: 40px 20px; }
+  .catalogo-grid { grid-template-columns: 1fr; }
+  .catalogo-header { flex-direction: column; gap: 8px; }
+}

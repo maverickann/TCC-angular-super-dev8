@@ -1,1 +1,100 @@
-/* You can add global styles to this file, and also import other style files */
+/* =============================================
+   ESTILOS GLOBAIS — TCC SISTEMA TÊXTIL
+   Aqui ficam o reset básico, as fontes e as
+   variáveis de cor do site inteiro. A ideia é
+   simples: em vez de escrever a cor fixa em cada
+   tela, eu uso essas "variáveis" (--nome-da-cor)
+   e o modo escuro só precisa trocar os valores.
+   ============================================= */
+
+/* Fontes do site — importadas UMA vez só aqui no arquivo global.
+   Escolhi Cormorant Garamond porque parece com as fontes
+   das marcas de luxo que pesquisei. */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;600&display=swap');
+
+/* Paleta do trabalho: preto, azul, verde e branco */
+:root {
+  /* cores fixas da identidade (não mudam com o tema) */
+  --cor-preto: #0a0a0a;
+  --cor-branco: #ffffff;
+  --cor-verde: #0e7a65;  /* verde dos botões de compra e do contador do carrinho */
+
+  /* cores que MUDAM conforme o tema (aqui é o modo claro, o padrão).
+     Os tons foram escolhidos pra ter contraste suficiente de leitura
+     (regra de acessibilidade WCAG AA) nos dois temas. */
+  --cor-azul: #2563eb;           /* azul de links e detalhes */
+  --cor-verde-texto: #0e7a65;    /* verde quando usado em TEXTO (preços) */
+  --cor-erro: #c0392b;           /* vermelho de mensagens de erro */
+  --cor-fundo: #ffffff;          /* fundo das páginas */
+  --cor-texto: #000000;          /* texto principal */
+  --cor-texto-suave: #555555;    /* texto secundário */
+  --cor-texto-apagado: #767676;  /* legendas e detalhes discretos */
+  --cor-borda: #e8e8e8;          /* linhas e bordas */
+  --cor-borda-clara: #eeeeee;    /* bordas ainda mais suaves */
+  --cor-fundo-destaque: #f7f7f7; /* fundos de caixas e resumos */
+}
+
+/* Quando o body recebe a classe "tema-escuro" (o botão de tema faz isso),
+   as mesmas variáveis ganham valores escuros e o site inteiro se adapta */
+body.tema-escuro {
+  --cor-azul: #60a5fa;           /* azul mais claro pra ler bem no fundo escuro */
+  --cor-verde-texto: #16a085;    /* verde mais vivo pra ler bem no fundo escuro */
+  --cor-erro: #e74c3c;           /* vermelho mais claro pelo mesmo motivo */
+  --cor-fundo: #0d0d0f;
+  --cor-texto: #f2f2f2;
+  --cor-texto-suave: #c0c0c0;
+  --cor-texto-apagado: #8a8a8a;
+  --cor-borda: #26262a;
+  --cor-borda-clara: #1e1e22;
+  --cor-fundo-destaque: #17171a;
+}
+
+/* Reset básico - professor falou que é boa prática */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
+  /* transição suave quando troca de tema (pra não "piscar" na tela) */
+  transition: background-color 0.3s ease;
+}
+
+/* Tira o sublinhado padrão dos links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Remove estilo padrão dos botões */
+button {
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+}
+
+input {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Classe pra textos que só o leitor de tela "vê".
+   Uso pra avisar pessoas cegas quando um produto entra
+   no carrinho — o texto fica invisível mas é anunciado. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

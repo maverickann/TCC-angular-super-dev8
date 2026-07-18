@@ -1,0 +1,30 @@
+<!-- =============================================
+     RODAPÉ DO SITE (usado em todas as telas)
+     ============================================= -->
+<footer class="rodape">
+  <div class="rodape-conteudo">
+
+    <!-- Coluna da esquerda: marca e direitos -->
+    <div class="rodape-coluna">
+      <p class="rodape-marca">URBAN VILUZ</p>
+      <p class="rodape-info">© 2026 · TCC Engenharia Têxtil · Todos os direitos reservados</p>
+    </div>
+
+    <!-- Coluna da direita: redes sociais -->
+    <div class="rodape-coluna rodape-social">
+      <p class="social-titulo">NOSSAS REDES</p>
+      <ul class="social-lista">
+        <!-- Percorro o array de redes sociais definido no arquivo .ts -->
+        @for (rede of redesSociais; track rede.nome) {
+          <li>
+            <!-- target=_blank abre em outra aba / rel=noopener é uma boa prática de segurança -->
+            <a class="social-link" [href]="rede.link" target="_blank" rel="noopener">
+              {{ rede.nome }} · <span class="social-arroba">{{ rede.arroba }}</span>
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+
+  </div>
+</footer>

@@ -1,8 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;600&display=swap');
+/* As fontes são importadas no styles.scss global.
+   As cores agora vêm das variáveis globais (styles.scss).
+   Assim o modo escuro troca tudo de uma vez só. */
 
 .pagina-wrapper {
   min-height: 100vh;
-  background-color: #fff;
+  background-color: var(--cor-fundo);
   display: flex;
   flex-direction: column;
 }
@@ -14,8 +16,8 @@
   align-items: center;
   padding: 0 48px;
   height: 72px;
-  border-bottom: 1px solid #e8e8e8;
-  background-color: #fff;
+  border-bottom: 1px solid var(--cor-borda);
+  background-color: var(--cor-fundo);
   position: sticky;
   top: 0;
   z-index: 999;
@@ -28,9 +30,9 @@
 
 .logo-texto {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem;
-  letter-spacing: 8px;
-  color: #000;
+  font-size: 1.3rem;
+  letter-spacing: 5px; /* nome maior, espacamento menor pra caber */
+  color: var(--cor-texto);
   font-weight: 400;
 }
 
@@ -40,17 +42,22 @@
   gap: 36px;
 }
 
+/* Estilo dos links da navbar. O background/border zerados
+   servem pros itens que são <button> ficarem iguais aos <a> */
 .nav-link {
   font-size: 0.6rem;
   letter-spacing: 3px;
-  color: #000;
+  color: var(--cor-texto);
   font-weight: 600;
   opacity: 0.6;
   transition: opacity 0.25s ease;
   position: relative;
-  padding-bottom: 2px;
+  padding: 0 0 2px;
   cursor: pointer;
   text-decoration: none;
+  background: none;
+  border: none;
+  font-family: inherit;
 }
 
 .nav-link::after {
@@ -60,7 +67,7 @@
   left: 0;
   width: 0%;
   height: 1px;
-  background-color: #000;
+  background-color: var(--cor-texto);
   transition: width 0.3s ease;
 }
 
@@ -75,29 +82,101 @@
   gap: 20px;
 }
 
+/* Botão de tema (lua/sol) — redondinho e discreto */
+.btn-tema {
+  background: transparent;
+  border: 1px solid var(--cor-borda);
+  color: var(--cor-texto);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.25s ease;
+  flex-shrink: 0;
+}
+
+.btn-tema:hover {
+  border-color: var(--cor-azul);
+}
+
+/* link do carrinho com a bolinha verde do contador */
+.nav-carrinho {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.carrinho-badge {
+  background-color: var(--cor-verde);
+  color: #fff;
+  font-size: 0.55rem;
+  min-width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+}
+
 .usuario-label {
   font-size: 0.6rem;
   letter-spacing: 2px;
-  color: #aaa;
+  color: var(--cor-texto-apagado);
   font-family: 'Montserrat', sans-serif;
 }
 
 .btn-sair {
   background: transparent;
-  border: 1px solid #000;
+  border: 1px solid var(--cor-texto);
   padding: 7px 18px;
   font-size: 0.55rem;
   letter-spacing: 3px;
   font-weight: 600;
-  color: #000;
+  color: var(--cor-texto);
   transition: all 0.25s ease;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
 }
 
 .btn-sair:hover {
-  background-color: #000;
-  color: #fff;
+  background-color: var(--cor-texto);
+  color: var(--cor-fundo);
+}
+
+/* botão ENTRAR (aparece quando ninguém está logado)
+   usa o azul da paleta pra chamar um pouco de atenção */
+.btn-entrar-nav {
+  background: transparent;
+  border: 1px solid var(--cor-azul);
+  padding: 7px 18px;
+  font-size: 0.55rem;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: var(--cor-azul);
+  transition: all 0.25s ease;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* no hover o texto pega a cor do fundo da página
+   (branco no claro, escuro no escuro — sempre dá pra ler) */
+.btn-entrar-nav:hover {
+  background-color: var(--cor-azul);
+  color: var(--cor-fundo);
+}
+
+/* o <main> ocupa o espaço todo entre a navbar e o rodapé */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ===== HERO ===== */
@@ -167,8 +246,11 @@
 
 .colecoes-header {
   margin-bottom: 48px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--cor-borda-clara);
   padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
 .colecoes-titulo {
@@ -176,7 +258,22 @@
   font-size: 0.75rem;
   letter-spacing: 8px;
   font-weight: 400;
-  color: #bbb;
+  color: var(--cor-texto-apagado);
+}
+
+/* atalho pro catálogo completo (do lado do grid), em azul */
+.link-catalogo {
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: var(--cor-azul);
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+  transition: opacity 0.25s ease;
+}
+
+.link-catalogo:hover {
+  opacity: 0.7;
 }
 
 .colecoes-grid {
@@ -234,13 +331,13 @@
   font-size: 1.2rem;
   font-weight: 400;
   letter-spacing: 4px;
-  color: #000;
+  color: var(--cor-texto);
   margin-bottom: 6px;
 }
 
 .card-descricao {
   font-size: 0.65rem;
-  color: #aaa;
+  color: var(--cor-texto-apagado);
   letter-spacing: 1px;
   margin-bottom: 14px;
   font-family: 'Montserrat', sans-serif;
@@ -249,7 +346,7 @@
 .card-link {
   font-size: 0.58rem;
   letter-spacing: 3px;
-  color: #000;
+  color: var(--cor-azul);
   font-weight: 600;
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -257,34 +354,11 @@
   text-decoration: none;
 }
 
-.colecao-card.card-ativo .card-link {
+/* o link aparece no hover do card OU quando recebe o foco
+   do teclado (senão quem navega por Tab não enxerga o link) */
+.colecao-card.card-ativo .card-link,
+.card-link:focus {
   opacity: 1;
-}
-
-/* ===== RODAPÉ ===== */
-.rodape {
-  border-top: 1px solid #eee;
-  padding: 32px 48px;
-}
-
-.rodape-conteudo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.rodape-marca {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1rem;
-  letter-spacing: 5px;
-  color: #000;
-}
-
-.rodape-info {
-  font-size: 0.6rem;
-  color: #bbb;
-  letter-spacing: 1px;
-  font-family: 'Montserrat', sans-serif;
 }
 
 /* ===== RESPONSIVIDADE ===== */
@@ -298,5 +372,5 @@
   .hero-titulo { font-size: 3rem; }
   .hero { background-attachment: scroll; }
   .colecoes-grid { grid-template-columns: 1fr; }
-  .rodape-conteudo { flex-direction: column; gap: 12px; text-align: center; }
+  .colecoes-header { flex-direction: column; gap: 10px; }
 }

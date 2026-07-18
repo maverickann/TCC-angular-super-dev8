@@ -1,6 +1,6 @@
 <!-- =============================================
      TELA PRINCIPAL — TCC SISTEMA TÊXTIL
-     Atualizado: nova imagem no hero + links funcionando
+     Agora é a primeira página do site (login opcional)
      ============================================= -->
 
 <div class="pagina-wrapper">
@@ -8,23 +8,54 @@
   <!-- ===== NAVBAR ===== -->
   <header class="navbar">
     <div class="navbar-logo">
-      <span class="logo-texto">TESSILE</span>
+      <span class="logo-texto">URBAN VILUZ</span>
     </div>
 
-    <!-- Links que rolam a pagina ate a secao da estacao -->
+    <!-- Botões que rolam a pagina ate a secao da estacao.
+         Usei <button> (e não <a>) porque botão de verdade funciona
+         com a tecla Tab e com leitor de tela -->
     <nav class="navbar-nav">
-      <a (click)="scrollTo('outono')"    class="nav-link">OUTONO</a>
-      <a (click)="scrollTo('inverno')"   class="nav-link">INVERNO</a>
-      <a (click)="scrollTo('primavera')" class="nav-link">PRIMAVERA</a>
-      <a (click)="scrollTo('verao')"     class="nav-link">VERÃO</a>
+      <button (click)="scrollTo('outono')"    class="nav-link">OUTONO</button>
+      <button (click)="scrollTo('inverno')"   class="nav-link">INVERNO</button>
+      <button (click)="scrollTo('primavera')" class="nav-link">PRIMAVERA</button>
+      <button (click)="scrollTo('verao')"     class="nav-link">VERÃO</button>
+      <a routerLink="/catalogo"               class="nav-link">CATÁLOGO</a>
     </nav>
 
     <div class="navbar-acoes">
-      <span class="usuario-label">{{ nomeUsuario }}</span>
-      <a (click)="irPara('movimentacao')" class="nav-link">MOVIMENTAÇÃO</a>
-      <button class="btn-sair" (click)="sair()">SAIR</button>
+
+      <!-- Botão que alterna entre modo claro e escuro -->
+      <button class="btn-tema" (click)="tema.alternarTema()"
+        [attr.aria-label]="tema.escuro ? 'Mudar para modo claro' : 'Mudar para modo escuro'"
+        [title]="tema.escuro ? 'Mudar para modo claro' : 'Mudar para modo escuro'">
+        {{ tema.escuro ? '☀' : '☾' }}
+      </button>
+
+      <!-- Link do carrinho com o contador de itens -->
+      <a routerLink="/carrinho" class="nav-link nav-carrinho">
+        CARRINHO
+        <!-- a bolinha verde só aparece se tiver item no carrinho -->
+        <span class="carrinho-badge" *ngIf="carrinho.totalItens() > 0">{{ carrinho.totalItens() }}</span>
+      </a>
+
+      <!-- área interna da fábrica: o link só aparece pra quem fez login -->
+      <a routerLink="/movimentacao" class="nav-link" *ngIf="usuario.estaLogado()">MOVIMENTAÇÃO</a>
+
+      <!-- Se tiver alguém logado mostra o nome + SAIR,
+           senão mostra o botão ENTRAR (login é opcional) -->
+      <ng-container *ngIf="usuario.estaLogado(); else botaoEntrar">
+        <span class="usuario-label">{{ usuario.nomeUsuario }}</span>
+        <button class="btn-sair" (click)="sair()">SAIR</button>
+      </ng-container>
+      <ng-template #botaoEntrar>
+        <button class="btn-entrar-nav" (click)="irParaLogin()">ENTRAR</button>
+      </ng-template>
+
     </div>
   </header>
+
+  <!-- <main> marca o conteúdo principal da página (acessibilidade) -->
+  <main>
 
   <!-- ===== HERO COM IMAGEM DE FUNDO ===== -->
   <!-- A imagem fica no CSS (.hero background-image) -->
@@ -45,6 +76,8 @@
 
     <div class="colecoes-header">
       <h2 class="colecoes-titulo">ESTAÇÕES</h2>
+      <!-- Atalho pro catálogo completo, do lado do grid de coleções -->
+      <a routerLink="/catalogo" class="link-catalogo">VER CATÁLOGO COMPLETO →</a>
     </div>
 
     <div class="colecoes-grid">
@@ -81,12 +114,9 @@
 
   </section>
 
-  <!-- ===== RODAPÉ ===== -->
-  <footer class="rodape">
-    <div class="rodape-conteudo">
-      <p class="rodape-marca">TESSILE</p>
-      <p class="rodape-info">© 2026 · TCC Engenharia Têxtil · Todos os direitos reservados</p>
-    </div>
-  </footer>
+  </main>
+
+  <!-- ===== RODAPÉ (componente compartilhado com as redes sociais) ===== -->
+  <app-rodape></app-rodape>
 
 </div>

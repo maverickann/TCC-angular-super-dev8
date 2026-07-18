@@ -1,13 +1,23 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <title>TCCAngularSuperDev8</title>
+  <title>URBAN VILUZ — Coleções Têxteis</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 <body>
+  <!-- Esse pedacinho de script roda antes do Angular carregar:
+       se o usuário deixou o modo escuro ligado na última visita,
+       já aplica a classe no body pra tela não "piscar" em branco -->
+  <script>
+    try {
+      if (localStorage.getItem('tema') === 'escuro') {
+        document.body.classList.add('tema-escuro');
+      }
+    } catch (e) { /* se o navegador bloquear o localStorage, segue no tema claro */ }
+  </script>
   <app-root></app-root>
 </body>
 </html>

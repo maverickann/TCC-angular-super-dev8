@@ -1,0 +1,169 @@
+<!-- =============================================
+     PÁGINA DO CARRINHO DE COMPRAS
+     Lista de itens + resumo do pedido (estilo Kabum simples)
+     ============================================= -->
+
+<div class="carrinho-wrapper">
+
+  <!-- ===== NAVBAR (mesmo estilo da home) ===== -->
+  <!-- Usei routerLink (e não (click)) nos links porque assim eles viram
+       links de verdade, que funcionam com a tecla Tab e com leitor de tela -->
+  <header class="navbar">
+    <nav class="navbar-nav">
+      <a class="nav-link" routerLink="/catalogo">← CONTINUAR COMPRANDO</a>
+    </nav>
+
+    <div class="navbar-logo">
+      <a class="logo-texto" routerLink="/home">URBAN VILUZ</a>
+    </div>
+
+    <div class="navbar-acoes">
+      <!-- Botão que alterna entre modo claro e escuro -->
+      <button class="btn-tema" (click)="tema.alternarTema()"
+        [attr.aria-label]="tema.escuro ? 'Mudar para modo claro' : 'Mudar para modo escuro'"
+        [title]="tema.escuro ? 'Mudar para modo claro' : 'Mudar para modo escuro'">
+        {{ tema.escuro ? '☀' : '☾' }}
+      </button>
+    </div>
+  </header>
+
+  <!-- <main> marca o conteúdo principal da página (acessibilidade) -->
+  <main class="carrinho-section">
+
+    <div class="carrinho-header">
+      <h1 class="carrinho-titulo">MEU CARRINHO</h1>
+      <span class="carrinho-qtd">{{ carrinho.totalItens() }} ITEM(NS)</span>
+    </div>
+
+    <!-- ===== MENSAGEM DE COMPRA FINALIZADA ===== -->
+    @if (compraFinalizada) {
+      <div class="compra-sucesso">
+        <p class="sucesso-icone">✓</p>
+        <h2 class="sucesso-titulo">PEDIDO CONFIRMADO!</h2>
+        <p class="sucesso-texto">Obrigado pela compra, {{ usuario.nomeUsuario }}. Você receberá os detalhes em breve.</p>
+        <button class="btn-continuar" (click)="irParaCatalogo()">VOLTAR AO CATÁLOGO</button>
+      </div>
+    }
+
+    <!-- ===== CARRINHO VAZIO ===== -->
+    @if (!compraFinalizada && carrinho.itens.length === 0) {
+      <div class="carrinho-vazio">
+        <p class="vazio-icone">🛒</p>
+        <h2 class="vazio-titulo">SEU CARRINHO ESTÁ VAZIO</h2>
+        <p class="vazio-texto">Explore o catálogo e escolha suas peças favoritas</p>
+        <button class="btn-continuar" (click)="irParaCatalogo()">IR PARA O CATÁLOGO</button>
+      </div>
+    }
+
+    <!-- ===== CARRINHO COM ITENS ===== -->
+    @if (!compraFinalizada && carrinho.itens.length > 0) {
+      <div class="carrinho-conteudo">
+
+        <!-- COLUNA DA ESQUERDA: lista de produtos.
+             Os role="table/row/cell" avisam o leitor de tela que
+             isso funciona como uma tabela, mesmo sendo feito com divs -->
+        <div class="lista-itens" role="table" aria-label="Itens do carrinho">
+
+          <!-- cabeçalho da "tabela" de itens -->
+          <div class="itens-cabecalho" role="row">
+            <span class="col-produto" role="columnheader">PRODUTO</span>
+            <span class="col-qtd" role="columnheader">QTD.</span>
+            <span class="col-preco" role="columnheader">PREÇO</span>
+            <span class="col-subtotal" role="columnheader">SUBTOTAL</span>
+            <span class="col-remover" role="columnheader"><span class="sr-only">Remover</span></span>
+          </div>
+
+          <!-- uma linha pra cada item do carrinho -->
+          @for (item of carrinho.itens; track item.nome) {
+            <div class="item-linha" role="row">
+
+              <!-- foto + nome do produto -->
+              <div class="col-produto item-produto" role="cell">
+                <div class="item-foto" [style.background-image]="'url(' + item.imagem + ')'"></div>
+                <div>
+                  <span class="item-categoria">{{ item.categoria }}</span>
+                  <p class="item-nome">{{ item.nome }}</p>
+                </div>
+              </div>
+
+              <!-- botões de aumentar e diminuir a quantidade -->
+              <div class="col-qtd controle-qtd" role="cell">
+                <button class="btn-qtd" (click)="carrinho.diminuir(item.nome)"
+                  [attr.aria-label]="'Diminuir quantidade de ' + item.nome" title="Diminuir quantidade">−</button>
+                <span class="qtd-numero">{{ item.quantidade }}</span>
+                <button class="btn-qtd" (click)="carrinho.aumentar(item.nome)"
+                  [attr.aria-label]="'Aumentar quantidade de ' + item.nome" title="Aumentar quantidade">+</button>
+              </div>
+
+              <!-- preço unitário -->
+              <span class="col-preco item-preco" role="cell">{{ formatarPreco(item.preco) }}</span>
+
+              <!-- preço × quantidade -->
+              <span class="col-subtotal item-subtotal" role="cell">{{ formatarPreco(item.preco * item.quantidade) }}</span>
+
+              <!-- botão de remover o item -->
+              <span class="col-remover" role="cell">
+                <button class="btn-remover" (click)="carrinho.remover(item.nome)"
+                  [attr.aria-label]="'Remover ' + item.nome + ' do carrinho'" title="Remover item">×</button>
+              </span>
+
+            </div>
+          }
+
+        </div>
+
+        <!-- COLUNA DA DIREITA: resumo do pedido -->
+        <aside class="resumo">
+          <h2 class="resumo-titulo">RESUMO DO PEDIDO</h2>
+
+          <div class="resumo-linha">
+            <span>Produtos ({{ carrinho.totalItens() }})</span>
+            <span>{{ formatarPreco(carrinho.valorProdutos()) }}</span>
+          </div>
+
+          <div class="resumo-linha">
+            <span>Frete</span>
+            <!-- frete grátis acima de R$ 399 (regra no arquivo .ts) -->
+            @if (valorFrete() === 0) {
+              <span class="frete-gratis">GRÁTIS</span>
+            } @else {
+              <span>{{ formatarPreco(valorFrete()) }}</span>
+            }
+          </div>
+
+          <!-- avisa quanto falta pro frete grátis -->
+          @if (valorFrete() > 0) {
+            <p class="dica-frete">
+              Faltam {{ formatarPreco(399 - carrinho.valorProdutos()) }} para o frete grátis
+            </p>
+          }
+
+          <div class="resumo-divisor"></div>
+
+          <div class="resumo-linha resumo-total">
+            <span>TOTAL</span>
+            <span>{{ formatarPreco(valorTotal()) }}</span>
+          </div>
+
+          <!-- aviso quando tenta finalizar sem login -->
+          @if (avisoLogin) {
+            <p class="aviso-login">
+              Você precisa entrar na sua conta para finalizar a compra.
+              Levando você para o login...
+            </p>
+          }
+
+          <button class="btn-finalizar" (click)="finalizarCompra()">FINALIZAR COMPRA</button>
+
+          <button class="btn-continuar-resumo" (click)="irParaCatalogo()">CONTINUAR COMPRANDO</button>
+        </aside>
+
+      </div>
+    }
+
+  </main>
+
+  <!-- ===== RODAPÉ (componente compartilhado) ===== -->
+  <app-rodape></app-rodape>
+
+</div>
