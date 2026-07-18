@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { FabricaHeader } from '../fabrica-header/fabrica-header';
 
 @Component({
   selector: 'app-financeiro',
-  imports: [RouterLink],
+  imports: [FabricaHeader],
   templateUrl: './financeiro.html',
   styleUrl: './financeiro.scss',
 })

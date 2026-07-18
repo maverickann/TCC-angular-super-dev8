@@ -39,7 +39,7 @@
       </a>
 
       <!-- área interna da fábrica: o link só aparece pra quem fez login -->
-      <a routerLink="/movimentacao" class="nav-link" *ngIf="usuario.estaLogado()">MOVIMENTAÇÃO</a>
+      <a routerLink="/inicio" class="nav-link" *ngIf="usuario.estaLogado()">FÁBRICA</a>
 
       <!-- Se tiver alguém logado mostra o nome + SAIR,
            senão mostra o botão ENTRAR (login é opcional) -->

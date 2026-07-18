@@ -1,0 +1,66 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  padding: 30px;
+  color: #fff;
+  background: linear-gradient(135deg, #041220, #071a2f 40%, #123e70);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+main {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin-bottom: 25px;
+  padding-left: 15px;
+  border-left: 6px solid #00d26a;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+nav a {
+  padding: 11px 16px;
+  border-radius: 10px;
+  color: #071a2f;
+  background: #00d26a;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+nav a:hover,
+nav a[aria-current="page"] {
+  background: #fff;
+}
+
+section {
+  padding: 28px;
+  border-left: 5px solid #00d26a;
+  border-radius: 16px;
+  background: rgb(255 255 255 / 8%);
+}
+
+h2 {
+  margin: 0 0 12px;
+  color: #3bf38f;
+}
+
+@media (max-width: 768px) {
+  :host {
+    padding: 18px;
+  }
+
+  nav {
+    flex-direction: column;
+  }
+
+  nav a {
+    text-align: center;
+  }
+}

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { FabricaHeader } from '../fabrica-header/fabrica-header';
 
 @Component({
   selector: 'app-estoque',
-  imports: [RouterLink],
+  imports: [FabricaHeader],
   templateUrl: './estoque.html',
   styleUrl: './estoque.scss',
 })

@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { FabricaHeader } from '../fabrica-header/fabrica-header';
+
+interface ServicoFaccao {
+  nome: string;
+  valor: number;
+  tempo: string;
+}
 
 @Component({
   selector: 'app-faccoes',
-  imports:[RouterLink],
+  imports: [FabricaHeader],
   templateUrl: './faccoes.html',
   styleUrl: './faccoes.scss',
 })
@@ -56,7 +62,7 @@ export class Faccoes {
   // SERVIÇOS
   // =============================
 
-  servicos = [
+  servicos: ServicoFaccao[] = [
 
     {
       nome: 'Costura',
@@ -181,7 +187,7 @@ export class Faccoes {
 
   }
 
-  editarServico(servico: any): void {
+  editarServico(servico: ServicoFaccao): void {
 
     console.log(servico);
 

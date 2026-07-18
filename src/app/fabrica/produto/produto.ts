@@ -1,36 +1,35 @@
-
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FabricaHeader } from '../fabrica-header/fabrica-header';
+
+interface ProdutoFabrica {
+  codigo: number | string;
+  nome: string;
+  of: number | string;
+  referencia: string;
+  categoria: string;
+  colecao: string;
+  fornecedor: string;
+  gramatura: string;
+  cor: string;
+  status: string;
+}
 
 @Component({
   selector: 'app-produto',
-   imports: [
- FormsModule,CommonModule,
-  ],
+  imports: [FormsModule, CommonModule, FabricaHeader],
   templateUrl: './produto.html',
   styleUrls: ['./produto.scss']
 })
 export class Produto implements OnInit {
+  mostrarModal = false;
+  produtoCarregado = false;
+  pesquisa = '';
+  produto: Partial<ProdutoFabrica> = {};
+  produtoSelecionado: ProdutoFabrica | null = null;
 
-  // Controla a abertura do modal
-  mostrarModal: boolean = false;
-
-  // Indica se existe um produto carregado
-  produtoCarregado: boolean = false;
-
-  // Campo de pesquisa
-  pesquisa: string = '';
-
-  // Produto atualmente selecionado
-  produto: any = {};
-
-  // Produto escolhido no modal
-  produtoSelecionado: any = null;
-
-  // Lista de produtos (simulando um banco)
-  produtos = [
-
+  private readonly todosProdutos: ProdutoFabrica[] = [
     {
       codigo: 1,
       nome: 'Jaqueta Jeans',
@@ -43,7 +42,6 @@ export class Produto implements OnInit {
       cor: 'Azul',
       status: 'Em Produção'
     },
-
     {
       codigo: 2,
       nome: 'Calça Cargo',
@@ -56,7 +54,6 @@ export class Produto implements OnInit {
       cor: 'Preta',
       status: 'Finalizado'
     },
-
     {
       codigo: 3,
       nome: 'Regata Básica',
@@ -69,104 +66,70 @@ export class Produto implements OnInit {
       cor: 'Branca',
       status: 'Em Desenvolvimento'
     }
-
   ];
 
-  constructor(){}
+  produtos = [...this.todosProdutos];
 
   ngOnInit(): void {
-
-    // Quando entrar na tela
-
-    if(!this.produtoCarregado){
-
+    if (!this.produtoCarregado) {
       this.abrirModal();
-
     }
-
   }
 
-  // Abre o modal
-  abrirModal(): void{
-
+  abrirModal(): void {
+    this.pesquisa = '';
+    this.produtos = [...this.todosProdutos];
     this.mostrarModal = true;
-
   }
 
-  // Fecha o modal
-  fecharModal(): void{
-
+  fecharModal(): void {
     this.mostrarModal = false;
-
   }
 
-  // Pesquisa produtos
-  pesquisar(): void{
+  pesquisar(): void {
+    const texto = this.pesquisa.trim().toLowerCase();
 
-    if(this.pesquisa.trim() == ''){
-
+    if (!texto) {
+      this.produtos = [...this.todosProdutos];
       return;
-
     }
 
-    const texto = this.pesquisa.toLowerCase();
-
-    this.produtos = this.produtos.filter(produto =>
-
+    this.produtos = this.todosProdutos.filter((produto) =>
       produto.nome.toLowerCase().includes(texto) ||
-
       produto.referencia.toLowerCase().includes(texto) ||
-
       produto.of.toString().includes(texto)
-
     );
-
   }
 
-  // Seleciona um produto da tabela
-  selecionar(produto:any): void{
-
+  selecionar(produto: ProdutoFabrica): void {
     this.produtoSelecionado = produto;
-
   }
 
-  // Confirma a seleção
-  confirmar(): void{
-
-    if(this.produtoSelecionado){
-
-      this.produto = {...this.produtoSelecionado};
-
-      this.produtoCarregado = true;
-
-      this.mostrarModal = false;
-
+  confirmar(): void {
+    if (!this.produtoSelecionado) {
+      return;
     }
 
-  }
-
-  // Limpa o formulário
-  novoProduto(): void{
-
-    this.produto = {
-
-      codigo:'',
-      nome:'',
-      of:'',
-      referencia:'',
-      categoria:'',
-      colecao:'',
-      fornecedor:'',
-      gramatura:'',
-      cor:'',
-      status:''
-
-    };
-
-    this.produtoCarregado = false;
-
+    this.produto = { ...this.produtoSelecionado };
+    this.produtoCarregado = true;
     this.mostrarModal = false;
-
   }
 
+  novoProduto(): void {
+    this.produto = {
+      codigo: '',
+      nome: '',
+      of: '',
+      referencia: '',
+      categoria: '',
+      colecao: '',
+      fornecedor: '',
+      gramatura: '',
+      cor: '',
+      status: ''
+    };
+    this.produtoSelecionado = null;
+    this.produtoCarregado = false;
+    this.mostrarModal = false;
+  }
 }

@@ -1,3 +1,11 @@
+:host {
+    display:block;
+    min-height:100vh;
+    padding:30px;
+    color:#fff;
+    background:linear-gradient(135deg,#041220 0%,#071A2F 35%,#0B2A4A 70%,#123D73 100%);
+}
+
 /*==========================================
   RESET
 ==========================================*/
@@ -38,30 +46,6 @@ body{
     padding:30px;
 }
 
-nav{
-    display:flex;
-    flex-wrap:wrap;
-    gap:15px;
-    margin-bottom:35px;
-}
-
-nav a{
-    text-decoration:none;
-    background:#1e118f;
-    color:#071A2F;
-    padding:12px 22px;
-    border-radius:10px;
-    font-weight:600;
-    transition:.3s;
-    box-shadow:0 5px 15px rgba(0,210,106,.35);
-}
-
-nav a:hover{
-    background:#1e118f;
-    transform:translateY(-3px);
-}
-
-
 .container{
     max-width:1400px;
     margin:auto;
@@ -76,7 +60,7 @@ header{
     margin-bottom:30px;
 }
 
-header h1{
+header .titulo-pagina{
     font-size:2rem;
     border-left:6px solid #00D26A;
     padding-left:15px;
@@ -135,7 +119,7 @@ button:hover{
 }
 
 .informacoes p{
-    color:#1e118f;
+    color:#d7e4ee;
 }
 
 /*==========================================

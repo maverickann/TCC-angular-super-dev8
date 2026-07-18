@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { FabricaHeader } from '../fabrica-header/fabrica-header';
 
 interface Produto {
   nome: string;
@@ -9,7 +9,7 @@ interface Produto {
 }
 @Component({
   selector: 'app-inicio',
-  imports: [RouterLink],
+  imports: [FabricaHeader],
   templateUrl: './inicio.html',
   styleUrl: './inicio.scss',
 })

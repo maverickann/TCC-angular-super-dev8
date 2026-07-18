@@ -1,0 +1,59 @@
+<header class="fabrica-header">
+  <div class="titulo-linha">
+    <a class="marca" routerLink="/inicio" aria-label="Ir para o painel da fábrica">
+      <svg class="marca-icone" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M3 21V10l6 4v-4l6 4V5h4v16H3Z"></path>
+        <path d="M7 18h2m3 0h2m3 0h2"></path>
+      </svg>
+      <span>Fábrica</span>
+    </a>
+
+    <span class="titulo-divisor" aria-hidden="true"></span>
+    <h1>{{ pageTitle() }}</h1>
+  </div>
+
+  <nav aria-label="Seções da fábrica">
+    <a
+      routerLink="/desenvolvimento"
+      routerLinkActive="ativo"
+      ariaCurrentWhenActive="page">
+      Desenvolvimento
+    </a>
+    <a
+      routerLink="/movimentacao"
+      routerLinkActive="ativo"
+      ariaCurrentWhenActive="page">
+      Movimentação
+    </a>
+    <a
+      routerLink="/produto"
+      routerLinkActive="ativo"
+      ariaCurrentWhenActive="page">
+      Produtos
+    </a>
+    <a
+      routerLink="/estoque"
+      routerLinkActive="ativo"
+      ariaCurrentWhenActive="page">
+      Estoque
+    </a>
+    <a
+      routerLink="/fluxo"
+      routerLinkActive="ativo"
+      ariaCurrentWhenActive="page">
+      Fluxo
+    </a>
+    <a
+      routerLink="/faccoes"
+      routerLinkActive="ativo"
+      ariaCurrentWhenActive="page">
+      Facções
+    </a>
+    <a
+      routerLink="/financeiro"
+      routerLinkActive="ativo"
+      ariaCurrentWhenActive="page">
+      Financeiro
+    </a>
+  </nav>
+</header>

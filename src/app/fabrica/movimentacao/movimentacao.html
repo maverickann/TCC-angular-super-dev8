@@ -1,144 +1,210 @@
-<h1>Movimentação</h1>
- <nav>
-        <a routerLink="/desenvolvimento">Desenvolvimento</a>
-        <a routerLink="/movimentacao">movimentaçao de setores</a>
-        <a routerLink="/produto">produto</a>
-        <a routerLink="estoque">Estoque</a>
-        <a routerLink="/fluxo">fluxo</a>
-        <a routerLink="/faccoes">Facçoes</a>
-        <a routerLink="/financeiro">financeiro</a>
+<main class="pagina-movimentacao">
+  <app-fabrica-header pageTitle="Movimentação de setores"></app-fabrica-header>
 
+  <form [formGroup]="form" (ngSubmit)="incluir()">
+    <fieldset class="painel painel-produto">
+      <legend>Sobre o produto</legend>
 
+      <div class="form-grid">
+        <div>
+          <label for="of">OF <span class="obrigatorio" aria-hidden="true">*</span></label>
+          <input
+            type="number"
+            id="of"
+            min="1"
+            formControlName="of"
+            aria-describedby="erro-of"
+            required>
+          @if (form.controls.of.invalid && form.controls.of.touched) {
+            <small id="erro-of" class="erro">Informe o número da OF.</small>
+          }
+        </div>
 
+        <div>
+          <label for="fluxo">Fluxo</label>
+          <input type="text" id="fluxo" formControlName="fluxo">
+        </div>
 
+        <div>
+          <label for="envio">Envio</label>
+          <input type="text" id="envio" formControlName="envio">
+        </div>
 
-    </nav>
-<div>
-    <fieldset>
-        <legend>Sobre o produto</legend>
-<!--
-        
-
-aprender Reactive Forms!!!!!!
-
-
-
--->        
-<label for="of">OF</label>
-<input type="number" id="of">
-
-<fieldset>
-    <legend>Setor</legend>
-    
-<label for="inicial">inicial/atual</label>
-<input type="search" id="inicial">
-
-<label for="final">Final</label>
-<input type="text" id="final">
-</fieldset>
-
-<label for="fluxo">Fluxo</label>
-<input type="text" id="fluxo">
-
-<label for="envio">Envio</label>
-<input type="text" id="envio">
-
-<label for="producao">Produção</label>
-<input type="text" id="producao">
-
+        <div>
+          <label for="producao">Produção</label>
+          <input type="text" id="producao" formControlName="producao">
+        </div>
+      </div>
     </fieldset>
-<fieldset>
-    <legend>transporte/movemntaçao/localizaçao</legend>
 
-    
-<label for="empresa_atual">empresa atual</label>
-<input type="text" id="empresa_atual">
+    <fieldset class="painel painel-setor">
+      <legend>Setor</legend>
 
-<label for="empresa_destino">Empresa Destinataria</label>
-<input type="text" id="empresa_destino">
+      <div class="form-grid">
+        <div>
+          <label for="inicial">Inicial/atual <span class="obrigatorio" aria-hidden="true">*</span></label>
+          <input
+            type="text"
+            id="inicial"
+            formControlName="inicial"
+            aria-describedby="erro-inicial"
+            required>
+          @if (form.controls.inicial.invalid && form.controls.inicial.touched) {
+            <small id="erro-inicial" class="erro">Informe o setor atual.</small>
+          }
+        </div>
 
-</fieldset>
-
-    <fieldset>
-        <legend>condiçao do produto</legend>
-        
-<label for="obs">Observação:</label>
-<input type="text" id="obs">
-
-<label for="qualidade">Qualidade:</label>
-<input type="text" id="qualidade">
-
+        <div>
+          <label for="final">Final <span class="obrigatorio" aria-hidden="true">*</span></label>
+          <input
+            type="text"
+            id="final"
+            formControlName="final"
+            aria-describedby="erro-final"
+            required>
+          @if (form.controls.final.invalid && form.controls.final.touched) {
+            <small id="erro-final" class="erro">Informe o setor de destino.</small>
+          }
+        </div>
+      </div>
     </fieldset>
-<label for="verificaçao-piloto">Possui piloto?</label>
 
-<input type="radio" id="sim" name="piloto" value="sim">
-<label for="sim">Sim</label>
+    <fieldset class="painel painel-transporte">
+      <legend>Transporte, movimentação e localização</legend>
 
-<input type="radio" id="nao" name="piloto" value="nao">
-<label for="nao">Não</label>
+      <div class="form-grid">
+        <div>
+          <label for="empresa-atual">Empresa atual</label>
+          <input type="text" id="empresa-atual" formControlName="empresaAtual">
+        </div>
 
-<label for=""></label>
-<input type="text">
-</div>
-<div>
-    //essa parte é a tabela
-    <table>
-      <thead>
+        <div>
+          <label for="empresa-destino">Empresa destinatária</label>
+          <input type="text" id="empresa-destino" formControlName="empresaDestino">
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="painel painel-condicao">
+      <legend>Condição do produto</legend>
+
+      <div class="form-grid">
+        <div>
+          <label for="observacao">Observação</label>
+          <input type="text" id="observacao" formControlName="observacao">
+        </div>
+
+        <div>
+          <label for="qualidade">Qualidade</label>
+          <input type="text" id="qualidade" formControlName="qualidade">
+        </div>
+      </div>
+
+      <fieldset class="radio-fieldset">
+        <legend>Possui piloto?</legend>
+        <div class="radio-group">
+          <input type="radio" id="piloto-sim" value="sim" formControlName="piloto">
+          <label for="piloto-sim">Sim</label>
+          <input type="radio" id="piloto-nao" value="nao" formControlName="piloto">
+          <label for="piloto-nao">Não</label>
+        </div>
+      </fieldset>
+    </fieldset>
+
+    <fieldset class="painel painel-quantidades">
+      <legend>Quantidades e expedição</legend>
+
+      <div class="form-grid">
+        <div>
+          <label for="quantidade-pedida">Quantidade pedida</label>
+          <input type="number" id="quantidade-pedida" min="0" formControlName="quantidadePedida">
+        </div>
+
+        <div>
+          <label for="quantidade-total">Quantidade total</label>
+          <input type="number" id="quantidade-total" min="0" formControlName="quantidadeTotal">
+        </div>
+
+        <div>
+          <label for="saldo-pecas">Saldo de peças</label>
+          <input type="number" id="saldo-pecas" min="0" formControlName="saldoPecas">
+        </div>
+
+        <div>
+          <label for="data-expedicao">Data de expedição</label>
+          <input type="date" id="data-expedicao" formControlName="dataExpedicao">
+        </div>
+
+        <div>
+          <label for="responsavel-legal">Responsável legal</label>
+          <input type="text" id="responsavel-legal" formControlName="responsavelLegal">
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="acoes" aria-label="Ações da movimentação">
+      <button type="submit">Incluir</button>
+      <button type="button" (click)="alterar()">Alterar</button>
+      <button type="button" (click)="excluir()">Excluir</button>
+      <button type="button" (click)="consultar()">Consultar por OF</button>
+      <button type="button" class="secundario" (click)="novoRegistro()">Limpar</button>
+    </div>
+  </form>
+
+  @if (mensagem) {
+    <p class="mensagem" aria-live="polite">{{ mensagem }}</p>
+  }
+
+  <section class="tabela-container" aria-labelledby="titulo-registros">
+    <h2 id="titulo-registros">Movimentações cadastradas</h2>
+    <p class="tabela-ajuda">Selecione uma linha para editar ou excluir o registro.</p>
+
+    <div class="rolagem-tabela" tabindex="0" aria-label="Tabela de movimentações">
+      <table>
+        <thead>
           <tr>
-            <th>Quatidade pedida</th>
+            <th>OF</th>
+            <th>Setor atual</th>
+            <th>Setor final</th>
+            <th>Quantidade pedida</th>
             <th>Quantidade total</th>
             <th>Saldo de peças</th>
             <th>Data de expedição</th>
-            <th>Resonsavel Legal</th>//pessoa que produz a peça
-            <th></th>
+            <th>Responsável legal</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of movimentacoes; track $index) {
+            <tr
+              class="registro"
+              tabindex="0"
+              (click)="selecionar($index)"
+              (keydown.enter)="selecionar($index)"
+              (keydown.space)="selecionar($index); $event.preventDefault()"
+              [class.linha-selecionada]="indiceSelecionado === $index"
+              [attr.aria-selected]="indiceSelecionado === $index">
+              <td data-label="OF">{{ item.of }}</td>
+              <td data-label="Setor atual">{{ item.inicial }}</td>
+              <td data-label="Setor final">{{ item.final }}</td>
+              <td data-label="Quantidade pedida">{{ item.quantidadePedida ?? '—' }}</td>
+              <td data-label="Quantidade total">{{ item.quantidadeTotal ?? '—' }}</td>
+              <td data-label="Saldo de peças">{{ item.saldoPecas ?? '—' }}</td>
+              <td data-label="Data de expedição">{{ item.dataExpedicao || '—' }}</td>
+              <td data-label="Responsável legal">{{ item.responsavelLegal || '—' }}</td>
+            </tr>
+          } @empty {
+            <tr class="tabela-vazia">
+              <td colspan="8">Nenhuma movimentação incluída.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-                <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-                <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr></tbody>
-
-    </table>
-
-</div>
-
-<section class="acoes">
-    <button>Incluir</button>
-
-    <button>alterar</button>
-
-    <button>Excluir</button>
-
-    <button>Consultar</button>
-
-    <button>Relatorio de Envio</button>
-
-
-    <button>Relatorio de corte</button>
-
-    <button>baixa de const</button>
-
-</section>
+  <section class="acoes relatorios" aria-label="Relatórios">
+    <button type="button" (click)="informarRelatorio('Relatório de envio')">Relatório de envio</button>
+    <button type="button" (click)="informarRelatorio('Relatório de corte')">Relatório de corte</button>
+    <button type="button" (click)="informarRelatorio('Baixa de consumo')">Baixa de consumo</button>
+  </section>
+</main>
