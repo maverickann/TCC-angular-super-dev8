@@ -30,7 +30,7 @@ export class LoginComponent {
     this.router.navigate(['home']);
   } else  if (u === 'Fabrica' && s === '123456') {
     alert('OK! Redirecionando...');
-    this.router.navigate(['movimentacao']);
+    this.router.navigate(['inicio']);
 
    }else {
     alert('FALHOU | usuario: [' + u + '] | senha: [' + s + ']');

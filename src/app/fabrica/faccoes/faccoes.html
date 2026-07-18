@@ -1,0 +1,383 @@
+<div class="container">
+
+    <header>
+
+        <h1>🏭 Gestão de Facções</h1>
+
+        <div class="acoes">
+            <button>➕ Nova Facção</button>
+            <button>📦 Nova Remessa</button>
+            <button>📥 Recebimento</button>
+            <button>📄 Exportar</button>
+        </div>
+
+    </header>
+
+    <!-- =========================
+         DASHBOARD
+    ========================== -->
+
+    <section class="cards">
+
+        <div class="card">
+            <h3>Facções Ativas</h3>
+            <span>18</span>
+        </div>
+
+        <div class="card">
+            <h3>OFs em Produção</h3>
+            <span>42</span>
+        </div>
+
+        <div class="card">
+            <h3>Peças Enviadas</h3>
+            <span>15.840</span>
+        </div>
+
+        <div class="card">
+            <h3>Peças Recebidas</h3>
+            <span>14.965</span>
+        </div>
+
+        <div class="card">
+            <h3>Pendentes</h3>
+            <span>875</span>
+        </div>
+
+        <div class="card">
+            <h3>Custo do Mês</h3>
+            <span>R$ 186.420,00</span>
+        </div>
+
+    </section>
+
+    <!-- =========================
+         FILTROS
+    ========================== -->
+
+    <section class="filtros">
+
+        <input type="text" placeholder="Pesquisar Facção">
+
+        <input type="text" placeholder="Número da OF">
+
+        <select>
+
+            <option>Status</option>
+            <option>Em Produção</option>
+            <option>Recebida</option>
+            <option>Atrasada</option>
+
+        </select>
+
+        <input type="date">
+
+        <button>Pesquisar</button>
+
+    </section>
+
+    <!-- =========================
+         CADASTRO DA FACÇÃO
+    ========================== -->
+
+    <section class="bloco">
+
+        <h2>Cadastro da Facção</h2>
+
+        <div class="grid">
+
+            <div>
+                <label>Código</label>
+                <input type="text">
+            </div>
+
+            <div>
+                <label>Nome da Facção</label>
+                <input type="text">
+            </div>
+
+            <div>
+                <label>Razão Social</label>
+                <input type="text">
+            </div>
+
+            <div>
+                <label>CNPJ</label>
+                <input type="text">
+            </div>
+
+            <div>
+                <label>Responsável</label>
+                <input type="text">
+            </div>
+
+            <div>
+                <label>Telefone</label>
+                <input type="text">
+            </div>
+
+            <div>
+                <label>WhatsApp</label>
+                <input type="text">
+            </div>
+
+            <div>
+                <label>E-mail</label>
+                <input type="email">
+            </div>
+
+            <div>
+                <label>Cidade</label>
+                <input type="text">
+            </div>
+
+            <div>
+                <label>Estado</label>
+                <input type="text">
+            </div>
+
+            <div>
+                <label>Especialidade</label>
+
+                <select>
+                    <option>Costura</option>
+                    <option>Corte</option>
+                    <option>Bordado</option>
+                    <option>Silk</option>
+                    <option>Estamparia</option>
+                    <option>Acabamento</option>
+                    <option>Revisão</option>
+                </select>
+
+            </div>
+
+            <div>
+                <label>Status</label>
+
+                <select>
+                    <option>Ativa</option>
+                    <option>Inativa</option>
+                    <option>Bloqueada</option>
+                </select>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+         SERVIÇOS
+    ========================== -->
+
+    <section class="bloco">
+
+        <h2>Serviços Prestados</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Serviço</th>
+                    <th>Valor Unitário</th>
+                    <th>Tempo Médio</th>
+                    <th>Ação</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>Costura</td>
+                    <td>R$ 4,80</td>
+                    <td>2 dias</td>
+                    <td><button>Editar</button></td>
+                </tr>
+
+                <tr>
+                    <td>Bordado</td>
+                    <td>R$ 6,20</td>
+                    <td>3 dias</td>
+                    <td><button>Editar</button></td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+    <!-- =========================
+         PEÇAS ENVIADAS
+    ========================== -->
+
+    <section class="bloco">
+
+        <h2>Peças Enviadas</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>OF</th>
+                    <th>Produto</th>
+                    <th>Referência</th>
+                    <th>Qtd.</th>
+                    <th>Envio</th>
+                    <th>Prazo</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>2587</td>
+                    <td>Camiseta</td>
+                    <td>REF-125</td>
+                    <td>500</td>
+                    <td>10/07/2026</td>
+                    <td>20/07/2026</td>
+                    <td>Em Produção</td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+    <!-- =========================
+         RECEBIMENTO
+    ========================== -->
+
+    <section class="bloco">
+
+        <h2>Recebimento</h2>
+
+        <div class="grid">
+
+            <div>
+                <label>Quantidade Recebida</label>
+                <input type="number">
+            </div>
+
+            <div>
+                <label>Quantidade com Defeito</label>
+                <input type="number">
+            </div>
+
+            <div>
+                <label>Quantidade Perdida</label>
+                <input type="number">
+            </div>
+
+            <div>
+
+                <label>Qualidade</label>
+
+                <select>
+
+                    <option>OK</option>
+                    <option>Reparo</option>
+                    <option>Defeito</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+         CUSTOS
+    ========================== -->
+
+    <section class="bloco">
+
+        <h2>Custos</h2>
+
+        <div class="grid">
+
+            <div>
+
+                <label>Valor Unitário</label>
+                <input type="number">
+
+            </div>
+
+            <div>
+
+                <label>Frete</label>
+                <input type="number">
+
+            </div>
+
+            <div>
+
+                <label>Retrabalho</label>
+                <input type="number">
+
+            </div>
+
+            <div>
+
+                <label>Custo Total</label>
+                <input type="text" readonly>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================
+         ATRASOS
+    ========================== -->
+
+    <section class="bloco">
+
+        <h2>Controle de Atrasos</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>OF</th>
+                    <th>Facção</th>
+                    <th>Prazo</th>
+                    <th>Dias</th>
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>2587</td>
+                    <td>Costura São José</td>
+                    <td>20/07/2026</td>
+                    <td>3</td>
+                    <td><span class="status atraso">Atrasada</span></td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+</div>

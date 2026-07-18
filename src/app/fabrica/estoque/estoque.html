@@ -1,0 +1,140 @@
+ <nav>
+        <a routerLink="/desenvolvimento">Desenvolvimento</a>
+        <a routerLink="/movimentacao">movimentaçao de setores</a>
+        <a routerLink="/produto">produto</a>
+        <a routerLink="/estoque">Estoque</a>
+        <a routerLink="/fluxo">fluxo</a>
+        <a routerLink="/faccoes">Facçoes</a>
+        <a routerLink="/financeiro">financeiro</a>
+
+
+
+
+
+    </nav>
+<div class="container">
+
+ 
+    <header>
+        <h1> Gerenciamento de Estoque</h1>
+
+        <div class="acoes">
+            <button>Novo Produto</button>
+            <button>Entrada</button>
+            <button>Saída</button>
+            <button>Exportar</button>
+        </div>
+    </header>
+
+    <section >
+
+        <div >
+            <h3>Total de Produtos</h3>
+            <span>523</span>
+        </div>
+
+        <div>
+            <h3>Itens em Estoque</h3>
+            <span>14.280</span>
+        </div>
+
+        <div >
+            <h3>Estoque Baixo</h3>
+            <span>18</span>
+        </div>
+
+        <div >
+            <h3>Valor do Estoque</h3>
+            <span>R$ 548.900,00</span>
+        </div>
+
+    </section>
+
+   
+    <section>
+
+        <input
+            type="text"
+            placeholder="Pesquisar produto...">
+
+        <select>
+            <option>Todos os setores</option>
+            <option>Camisetas</option>
+            <option>Calças</option>
+            <option>Jaquetas</option>
+        </select>
+
+        <button>Pesquisar</button>
+
+    </section>
+
+    <section>
+
+        <h2>Produtos</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Código</th>
+                    <th>Produto</th>
+                    <th>Categoria</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>0001</td>
+                    <td>Jaqueta Jeans</td>
+                    <td>Jaquetas</td>
+                    <td>250</td>
+                    <td>R$ 179,90</td>
+                    <td> Disponível</td>
+                    <td>
+                        <button>Editar</button>
+                        <button>Excluir</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>0002</td>
+                    <td>Calça Cargo</td>
+                    <td>Calças</td>
+                    <td>15</td>
+                    <td>R$ 149,90</td>
+                    <td> Baixo</td>
+                    <td>
+                        <button>Editar</button>
+                        <button>Excluir</button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>0003</td>
+                    <td>Regata Verão</td>
+                    <td>Camisetas</td>
+                    <td>0</td>
+                    <td>R$ 59,90</td>
+                    <td> Sem Estoque</td>
+                    <td>
+                        <button>Editar</button>
+                        <button>Excluir</button>
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+</div>
+
+

@@ -1,0 +1,258 @@
+1. Dashboard
+Indicadores da fábrica
+Produção do dia
+Peças em atraso
+Estoque baixo
+Faturamento
+Ordens em andamento
+2. Desenvolvimento de Produto
+Cadastro de coleções
+Moodboard
+Desenhos
+Protótipos
+Aprovações
+Histórico de alterações
+3. Engenharia do Produto (Ficha Técnica)
+Código
+Referência
+Nome
+Fotos
+Descrição
+Sequência de montagem
+Consumo de matéria-prima
+Tempo de produção
+Observações
+4. Modelagem
+Moldes
+Graduação
+Versões
+Arquivos CAD
+Alterações
+5. Grade de Tamanhos
+PP
+P
+M
+G
+GG
+XG
+Medidas
+Tabela de medidas
+6. Tecidos
+Cadastro
+Composição
+Gramatura
+Cor
+Largura
+Rendimento
+Lote
+Fornecedor
+7. Aviamentos
+Botões
+Zíper
+Linha
+Elástico
+Cordão
+Etiquetas
+Tags
+Embalagens
+8. Planejamento da Produção (PCP)
+Ordem de Produção (OP)
+Planejamento semanal
+Prioridades
+Cronograma
+Capacidade produtiva
+9. Corte
+Encaixe
+Risco
+Consumo
+Quantidade cortada
+Perdas
+Sobras
+10. Costura
+Operações
+Operadores
+Tempo
+Produção
+Eficiência
+11. Bordado
+Arquivos
+Máquinas
+Produção
+12. Estamparia
+Silk
+Sublimação
+DTF
+Impressão
+13. Lavanderia
+Lavagens
+Tingimento
+Processos especiais
+14. Facções
+Cadastro
+Serviços
+Peças enviadas
+Recebimento
+Custos
+Atrasos
+15. Movimentação entre Setores
+
+Exemplo do fluxo:
+
+Desenvolvimento
+      ↓
+Modelagem
+      ↓
+Corte
+      ↓
+Costura
+      ↓
+Bordado
+      ↓
+Lavanderia
+      ↓
+Acabamento
+      ↓
+Qualidade
+      ↓
+Estoque
+      ↓
+Expedição
+
+Registrar:
+
+Data e hora
+Usuário responsável
+Quantidade
+Setor de origem
+Setor de destino
+16. Controle de Qualidade
+Aprovação
+Defeitos
+Fotos
+Retrabalho
+Motivos da rejeição
+17. Acabamento
+Limpeza
+Revisão
+Passadoria
+Embalagem
+18. Estoque de Matéria-Prima
+Tecidos
+Aviamentos
+Entradas
+Saídas
+Inventário
+19. Estoque de Produtos Acabados
+Quantidade
+Localização
+Reservas
+Lotes
+20. Expedição
+Separação
+Conferência
+Embalagem
+Nota Fiscal
+Transportadora
+21. Compras
+Solicitação
+Cotação
+Pedido de compra
+Recebimento
+22. Fornecedores
+Cadastro
+Contratos
+Histórico
+Avaliação
+23. Clientes
+Cadastro
+Pedidos
+Limite de crédito
+Histórico
+24. Vendas
+Orçamentos
+Pedidos
+Faturamento
+Comissões
+25. Financeiro
+Contas a pagar
+Contas a receber
+Fluxo de caixa
+Centro de custos
+26. RH
+Funcionários
+Produção individual
+Horas trabalhadas
+27. Máquinas
+Cadastro
+Manutenção preventiva
+Histórico de manutenção
+28. Indicadores (KPIs)
+Eficiência da produção
+Tempo médio por peça
+Índice de retrabalho
+Índice de defeitos
+Produção por setor
+Produção por funcionário
+29. Relatórios
+Produção
+Estoque
+Custos
+Vendas
+Qualidade
+Facções
+30. Auditoria
+Quem alterou
+Data
+Hora
+Antes e depois da alteração
+31. Controle por Código de Barras ou QR Code
+
+Cada peça recebe uma etiqueta com QR Code ou código de barras contendo um identificador único.
+
+Ao passar por um setor, o colaborador faz a leitura do código e o sistema registra automaticamente:
+
+Setor atual
+Data e hora
+Funcionário responsável
+Status da peça
+
+Assim, é possível acompanhar o histórico completo da peça.
+
+Fluxo completo da peça
+Desenvolvimento
+      ↓
+Ficha Técnica
+      ↓
+Modelagem
+      ↓
+Compra de Materiais
+      ↓
+Recebimento
+      ↓
+Estoque de Matéria-Prima
+      ↓
+Planejamento (PCP)
+      ↓
+Corte
+      ↓
+Costura
+      ↓
+Bordado/Estampa
+      ↓
+Lavanderia
+      ↓
+Acabamento
+      ↓
+Controle de Qualidade
+      ↓
+Estoque de Produtos Acabados
+      ↓
+Pedido de Venda
+      ↓
+Separação
+      ↓
+Expedição
+      ↓
+Cliente
+
+Uma funcionalidade que faz bastante diferença é o histórico completo da peça. Ao abrir o cadastro de uma peça específica, você pode visualizar uma linha do tempo com todos os eventos registrados: quando foi criada, quem aprovou a ficha técnica, quando entrou em corte, em costura, em facção, em qualidade, quando foi embalada e quando foi expedida. Isso facilita localizar gargalos, acompanhar atrasos e manter a rastreabilidade de cada item produzido.

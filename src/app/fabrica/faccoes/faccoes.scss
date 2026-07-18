@@ -6,7 +6,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:"Segoe UI",Arial,sans-serif;
+    font-family:"Segoe UI", Arial, sans-serif;
 }
 
 /*==========================================
@@ -23,6 +23,7 @@ body{
 app-root{
     display:block;
     min-height:100vh;
+    background:#071A2F;
 }
 
 body{
@@ -53,50 +54,55 @@ body{
 ==========================================*/
 
 header{
-    margin-bottom:40px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+    margin-bottom:35px;
 }
 
 header h1{
-    font-size:2.4rem;
+    font-size:2.2rem;
     color:#ffffff;
     border-left:6px solid #00D26A;
     padding-left:15px;
-    margin-bottom:25px;
 }
 
 /*==========================================
-  MENU
+  BOTÕES
 ==========================================*/
 
-nav{
+.acoes{
     display:flex;
     flex-wrap:wrap;
-    gap:15px;
+    gap:12px;
 }
 
-nav a{
-    text-decoration:none;
+button{
     background:#00D26A;
     color:#071A2F;
+    border:none;
     padding:12px 20px;
     border-radius:10px;
-    font-weight:bold;
+    cursor:pointer;
+    font-weight:700;
     transition:.3s;
-    box-shadow:0 5px 15px rgba(0,210,106,.35);
+    box-shadow:0 5px 15px rgba(0,210,106,.30);
 }
 
-nav a:hover{
+button:hover{
     background:#ffffff;
     transform:translateY(-3px);
 }
 
 /*==========================================
-  CARDS
+  DASHBOARD
 ==========================================*/
 
 .cards{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
     gap:20px;
     margin-bottom:35px;
 }
@@ -105,11 +111,11 @@ nav a:hover{
     background:rgba(255,255,255,.08);
     backdrop-filter:blur(12px);
     border:1px solid rgba(255,255,255,.15);
-    border-left:6px solid #00D26A;
+    border-left:5px solid #00D26A;
     border-radius:18px;
     padding:25px;
-    transition:.3s;
     box-shadow:0 10px 25px rgba(0,0,0,.30);
+    transition:.3s;
 }
 
 .card:hover{
@@ -117,15 +123,32 @@ nav a:hover{
 }
 
 .card h3{
-    color:#c7d5e6;
+    color:#c7d4e5;
     margin-bottom:15px;
     font-size:16px;
 }
 
 .card span{
-    font-size:2rem;
     color:#00D26A;
+    font-size:2rem;
     font-weight:bold;
+}
+
+/*==========================================
+  FILTROS
+==========================================*/
+
+.filtros{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-bottom:35px;
+
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:18px;
+    padding:20px;
 }
 
 /*==========================================
@@ -136,10 +159,10 @@ nav a:hover{
     background:rgba(255,255,255,.08);
     backdrop-filter:blur(12px);
     border:1px solid rgba(255,255,255,.15);
-    border-left:6px solid #00D26A;
+    border-left:5px solid #00D26A;
     border-radius:18px;
     padding:30px;
-    margin-bottom:35px;
+    margin-bottom:30px;
     box-shadow:0 10px 25px rgba(0,0,0,.30);
 }
 
@@ -149,16 +172,57 @@ nav a:hover{
 }
 
 /*==========================================
-  TABELA
+  GRID
+==========================================*/
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+/*==========================================
+  CAMPOS
+==========================================*/
+
+label{
+    display:block;
+    margin-bottom:8px;
+    color:#ffffff;
+    font-weight:600;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:13px;
+    border-radius:10px;
+    border:2px solid #00D26A;
+    background:#ffffff;
+    color:#071A2F;
+    font-size:15px;
+    transition:.3s;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    outline:none;
+    box-shadow:0 0 12px rgba(0,210,106,.45);
+}
+
+/*==========================================
+  TABELAS
 ==========================================*/
 
 table{
     width:100%;
     border-collapse:collapse;
-    background:#ffffff;
-    color:#071A2F;
-    border-radius:15px;
     overflow:hidden;
+    border-radius:15px;
+    background:#ffffff;
+    color:#1f2937;
 }
 
 thead{
@@ -166,54 +230,54 @@ thead{
 }
 
 th{
-    padding:15px;
     color:#071A2F;
-    font-weight:bold;
+    padding:15px;
+    font-weight:700;
 }
 
 td{
-    padding:15px;
+    padding:14px;
     text-align:center;
-    border-bottom:1px solid #dddddd;
+    border-bottom:1px solid #e5e7eb;
 }
 
 tbody tr:nth-child(even){
-    background:#f5f7fa;
+    background:#f4f7fb;
 }
 
 tbody tr:hover{
-    background:#dfffe9;
+    background:#d8ffe8;
+}
+
+td button{
+    padding:8px 12px;
+    font-size:13px;
 }
 
 /*==========================================
-  GRÁFICOS
+  STATUS
 ==========================================*/
 
-.graficos{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(450px,1fr));
-    gap:25px;
+.status{
+    display:inline-block;
+    padding:8px 15px;
+    border-radius:20px;
+    font-weight:bold;
 }
 
-.grafico{
-    background:rgba(255,255,255,.08);
-    backdrop-filter:blur(12px);
-    border:1px solid rgba(255,255,255,.15);
-    border-left:6px solid #00D26A;
-    border-radius:18px;
-    padding:25px;
-    min-height:350px;
-    box-shadow:0 10px 25px rgba(0,0,0,.30);
+.atraso{
+    background:#ff4d4f;
+    color:#ffffff;
 }
 
-.grafico h2{
-    color:#00D26A;
-    margin-bottom:20px;
+.producao{
+    background:#ffd43b;
+    color:#071A2F;
 }
 
-canvas{
-    width:100%;
-    height:280px;
+.finalizado{
+    background:#00D26A;
+    color:#071A2F;
 }
 
 /*==========================================
@@ -239,22 +303,30 @@ canvas{
 
 @media(max-width:900px){
 
-    nav{
+    header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .acoes{
+        width:100%;
+    }
+
+    .acoes button{
+        flex:1;
+    }
+
+    .filtros{
         flex-direction:column;
     }
 
-    nav a{
-        width:100%;
-        text-align:center;
-    }
-
-    .graficos{
+    .grid{
         grid-template-columns:1fr;
     }
 
 }
 
-@media(max-width:768px){
+@media(max-width:700px){
 
     body{
         padding:20px;
@@ -270,8 +342,8 @@ canvas{
         white-space:nowrap;
     }
 
-    header h1{
-        font-size:2rem;
+    button{
+        width:100%;
     }
 
 }

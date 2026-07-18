@@ -1,0 +1,591 @@
+<nav>
+    <a routerLink="/desenvolvimento">Desenvolvimento</a>
+    <a routerLink="/movimentacao">Movimentação</a>
+    <a routerLink="/produto">Produto</a>
+    <a routerLink="/estoque">Estoque</a>
+    <a routerLink="/fluxo">Fluxo</a>
+    <a routerLink="/faccoes">Facções</a>
+    <a routerLink="/financeiro">Financeiro</a>
+</nav>
+
+<div class="container">
+
+    <!-- ========================= -->
+    <!-- CABEÇALHO -->
+    <!-- ========================= -->
+
+    <header>
+
+        <h1>Dashboard Financeiro</h1>
+
+        <div class="acoes">
+
+            <button>Novo Lançamento</button>
+
+            <button>Exportar Excel</button>
+
+            <button>Exportar PDF</button>
+
+            <button>Relatórios</button>
+
+        </div>
+
+    </header>
+
+    <!-- ========================= -->
+    <!-- RESUMO FINANCEIRO -->
+    <!-- ========================= -->
+
+    <section class="cards">
+
+        <div class="card">
+
+            <h3>Receita do Mês</h3>
+
+            <h2>R$ 520.000,00</h2>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Despesas</h3>
+
+            <h2>R$ 312.000,00</h2>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Lucro</h3>
+
+            <h2>R$ 208.000,00</h2>
+
+        </div>
+
+        <div class="card">
+
+            <h3>Contas a Pagar</h3>
+
+            <h2>18</h2>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- FILTROS -->
+    <!-- ========================= -->
+
+    <section class="filtros">
+
+        <input
+            type="text"
+            placeholder="Pesquisar lançamento...">
+
+        <select>
+
+            <option>Todos os meses</option>
+            <option>Janeiro</option>
+            <option>Fevereiro</option>
+            <option>Março</option>
+            <option>Abril</option>
+            <option>Maio</option>
+            <option>Junho</option>
+
+        </select>
+
+        <select>
+
+            <option>Todas as categorias</option>
+            <option>Receitas</option>
+            <option>Tecidos</option>
+            <option>Facções</option>
+            <option>Funcionários</option>
+            <option>Transporte</option>
+
+        </select>
+
+        <button>Pesquisar</button>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- GRÁFICOS -->
+    <!-- ========================= -->
+
+    <section class="graficos">
+
+        <div class="grafico">
+
+            <h2>Receita x Despesas</h2>
+
+            <canvas id="graficoReceita"></canvas>
+
+        </div>
+
+        <div class="grafico">
+
+            <h2>Despesas por Categoria</h2>
+
+            <canvas id="graficoPizza"></canvas>
+
+        </div>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- FLUXO DE CAIXA -->
+    <!-- ========================= -->
+
+    <section class="grafico-largo">
+
+        <h2>Fluxo de Caixa (12 meses)</h2>
+
+        <canvas id="graficoFluxo"></canvas>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- CUSTO POR OF -->
+    <!-- ========================= -->
+
+    <section class="grafico-largo">
+
+        <h2>Custo por Ordem de Fabricação (OF)</h2>
+
+        <canvas id="graficoOF"></canvas>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- TABELA -->
+    <!-- ========================= -->
+
+    <section class="tabela">
+
+        <h2>Últimos Lançamentos</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Data</th>
+
+                    <th>Descrição</th>
+
+                    <th>Categoria</th>
+
+                    <th>Entrada</th>
+
+                    <th>Saída</th>
+
+                    <th>Saldo</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr>
+
+                    <td>01/07/2026</td>
+
+                    <td>Venda OF 2587</td>
+
+                    <td>Receita</td>
+
+                    <td>R$ 18.500,00</td>
+
+                    <td>-</td>
+
+                    <td>R$ 18.500,00</td>
+
+                    <td>Recebido</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>03/07/2026</td>
+
+                    <td>Compra de Tecido</td>
+
+                    <td>Tecidos</td>
+
+                    <td>-</td>
+
+                    <td>R$ 5.200,00</td>
+
+                    <td>R$ 13.300,00</td>
+
+                    <td>Pago</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>05/07/2026</td>
+
+                    <td>Pagamento Facção</td>
+
+                    <td>Facções</td>
+
+                    <td>-</td>
+
+                    <td>R$ 7.800,00</td>
+
+                    <td>R$ 5.500,00</td>
+
+                    <td>Pago</td>
+
+                </tr>
+
+                <tr>
+
+                    <td>08/07/2026</td>
+
+                    <td>Venda OF 2602</td>
+
+                    <td>Receita</td>
+
+                    <td>R$ 22.400,00</td>
+
+                    <td>-</td>
+
+                    <td>R$ 27.900,00</td>
+
+                    <td>Recebido</td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
+
+</div>
+<!--======================================
+    ANÁLISE DA ORDEM DE FABRICAÇÃO
+=======================================-->
+
+<section class="analise-of">
+
+    <header>
+
+        <h2>📊 Análise da Ordem de Fabricação</h2>
+
+        <div class="acoes">
+
+            <button>Selecionar OF</button>
+
+            <button>Imprimir</button>
+
+            <button>Exportar PDF</button>
+
+        </div>
+
+    </header>
+
+    <div class="informacoes-gerais">
+
+        <div class="info">
+
+            <h3>Produto</h3>
+
+            <p>Jaqueta Jeans Premium</p>
+
+        </div>
+
+        <div class="info">
+
+            <h3>OF</h3>
+
+            <p>2587</p>
+
+        </div>
+
+        <div class="info">
+
+            <h3>Coleção</h3>
+
+            <p>Street 2026</p>
+
+        </div>
+
+        <div class="info">
+
+            <h3>Status</h3>
+
+            <p>🟢 Em Produção</p>
+
+        </div>
+
+        <div class="info">
+
+            <h3>Quantidade</h3>
+
+            <p>520 peças</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--======================================
+    CUSTOS DA OF
+=======================================-->
+
+<section class="cards-custos">
+
+    <div class="card">
+
+        <h3>Tecido</h3>
+
+        <h2>R$ 18.500,00</h2>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Modelagem</h3>
+
+        <h2>R$ 3.200,00</h2>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Corte</h3>
+
+        <h2>R$ 6.900,00</h2>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Costura</h3>
+
+        <h2>R$ 24.800,00</h2>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Acabamento</h3>
+
+        <h2>R$ 8.400,00</h2>
+
+    </div>
+
+    <div class="card">
+
+        <h3>Expedição</h3>
+
+        <h2>R$ 2.300,00</h2>
+
+    </div>
+
+</section>
+
+<!--======================================
+    GRÁFICOS
+=======================================-->
+
+<section class="graficos">
+
+    <div class="grafico">
+
+        <h2>Custos por Setor</h2>
+
+        <canvas id="graficoCustoSetor"></canvas>
+
+    </div>
+
+    <div class="grafico">
+
+        <h2>Distribuição dos Custos</h2>
+
+        <canvas id="graficoPizzaCustos"></canvas>
+
+    </div>
+
+</section>
+
+<section class="grafico-largo">
+
+    <h2>Evolução dos Custos da OF</h2>
+
+    <canvas id="graficoLinhaOF"></canvas>
+
+</section>
+
+<!--======================================
+    DEMONSTRATIVO FINANCEIRO
+=======================================-->
+
+<section class="resultado">
+
+    <h2>Resumo Financeiro</h2>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Descrição</th>
+
+                <th>Valor</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>Matéria-prima</td>
+
+                <td>R$ 18.500,00</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Mão de obra</td>
+
+                <td>R$ 36.400,00</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Transporte</td>
+
+                <td>R$ 2.100,00</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Custos Extras</td>
+
+                <td>R$ 1.700,00</td>
+
+            </tr>
+
+            <tr>
+
+                <td><strong>Custo Total</strong></td>
+
+                <td><strong>R$ 58.700,00</strong></td>
+
+            </tr>
+
+            <tr>
+
+                <td>Valor da Venda</td>
+
+                <td>R$ 91.300,00</td>
+
+            </tr>
+
+            <tr>
+
+                <td><strong>Lucro</strong></td>
+
+                <td><strong>R$ 32.600,00</strong></td>
+
+            </tr>
+
+            <tr>
+
+                <td><strong>Margem</strong></td>
+
+                <td><strong>35,70%</strong></td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</section>
+
+<!--======================================
+    HISTÓRICO DA PRODUÇÃO
+=======================================-->
+
+<section class="historico">
+
+    <h2>Histórico da Produção</h2>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Data</th>
+
+                <th>Setor</th>
+
+                <th>Responsável</th>
+
+                <th>Status</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+
+                <td>01/07/2026</td>
+
+                <td>Modelagem</td>
+
+                <td>João</td>
+
+                <td>Finalizado</td>
+
+            </tr>
+
+            <tr>
+
+                <td>03/07/2026</td>
+
+                <td>Corte</td>
+
+                <td>Carlos</td>
+
+                <td>Finalizado</td>
+
+            </tr>
+
+            <tr>
+
+                <td>05/07/2026</td>
+
+                <td>Costura</td>
+
+                <td>Facção Alfa</td>
+
+                <td>Em Produção</td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</section>

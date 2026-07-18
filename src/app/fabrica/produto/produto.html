@@ -1,1 +1,264 @@
-<p>produto works!</p>
+<nav>
+    <a routerLink="/desenvolvimento">Desenvolvimento</a>
+    <a routerLink="/movimentacao">Movimentação</a>
+    <a routerLink="/produto">Produto</a>
+    <a routerLink="/estoque">Estoque</a>
+    <a routerLink="/fluxo">Fluxo</a>
+    <a routerLink="/faccoes">Facções</a>
+    <a routerLink="/financeiro">Financeiro</a>
+</nav>
+
+<div class="container">
+
+    <header>
+
+        <h1>Dados do Produto</h1>
+
+        <div class="acoes">
+
+            <button (click)="abrirModal()">
+                🔍 Buscar
+            </button>
+
+            <button (click)="novoProduto()">
+                ➕ Novo Produto
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <section class="resumo" *ngIf="produtoCarregado">
+
+        <h2>{{ produto.nome }}</h2>
+
+        <div class="informacoes">
+
+            <p><strong>OF:</strong> {{ produto.of }}</p>
+
+            <p><strong>Referência:</strong> {{ produto.referencia }}</p>
+
+            <p><strong>Status:</strong> {{ produto.status }}</p>
+
+            <p><strong>Coleção:</strong> {{ produto.colecao }}</p>
+
+        </div>
+
+    </section>
+
+    
+
+    <section class="card">
+
+        <h2>Cadastro do Produto</h2>
+
+        <div class="grid">
+
+            <div>
+
+                <label>Nome da Peça</label>
+
+                <input
+                    type="text"
+                    [(ngModel)]="produto.nome">
+
+            </div>
+
+            <div>
+
+                <label>OF</label>
+
+                <input
+                    type="number"
+                    [(ngModel)]="produto.of">
+
+            </div>
+
+            <div>
+
+                <label>Referência</label>
+
+                <input
+                    type="text"
+                    [(ngModel)]="produto.referencia">
+
+            </div>
+
+            <div>
+
+                <label>Categoria</label>
+
+                <input
+                    type="text"
+                    [(ngModel)]="produto.categoria">
+
+            </div>
+
+            <div>
+
+                <label>Coleção</label>
+
+                <input
+                    type="text"
+                    [(ngModel)]="produto.colecao">
+
+            </div>
+
+            <div>
+
+                <label>Fornecedor</label>
+
+                <input
+                    type="text"
+                    [(ngModel)]="produto.fornecedor">
+
+            </div>
+
+            <div>
+
+                <label>Gramatura</label>
+
+                <input
+                    type="text"
+                    [(ngModel)]="produto.gramatura">
+
+            </div>
+
+            <div>
+
+                <label>Cores</label>
+
+                <input
+                    type="text"
+                    [(ngModel)]="produto.cor">
+
+            </div>
+
+            <div>
+
+                <label>Status</label>
+
+                <select [(ngModel)]="produto.status">
+
+                    <option>Em Desenvolvimento</option>
+
+                    <option>Em Produção</option>
+
+                    <option>Finalizado</option>
+
+                    <option>Cancelado</option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="acoes-formulario">
+
+        <button>Salvar</button>
+
+        <button>Alterar</button>
+
+        <button>Excluir</button>
+
+        <button>Cancelar</button>
+
+    </section>
+
+</div>
+
+<div
+    class="modal-fundo"
+    *ngIf="mostrarModal">
+
+    <div class="modal">
+
+        <h2>Localizar Produto</h2>
+
+        <input
+            type="text"
+            placeholder="Digite Nome, OF, Referência, Código..."
+            [(ngModel)]="pesquisa">
+
+        <button (click)="pesquisar()">
+            Pesquisar
+        </button>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Código</th>
+
+                    <th>Produto</th>
+
+                    <th>OF</th>
+
+                    <th>Referência</th>
+
+                    <th></th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <tr *ngFor="let item of produtos">
+
+                    <td>{{item.codigo}}</td>
+
+                    <td>{{item.nome}}</td>
+
+                    <td>{{item.of}}</td>
+
+                    <td>{{item.referencia}}</td>
+
+                    <td>
+
+                        <button
+                            (click)="selecionar(item)">
+
+                            Selecionar
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+        <div class="acoes-modal">
+
+            <button (click)="confirmar()">
+
+                Confirmar
+
+            </button>
+
+            <button (click)="novoProduto()">
+
+                Novo Produto
+
+            </button>
+
+            <button (click)="fecharModal()">
+
+                Cancelar
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
