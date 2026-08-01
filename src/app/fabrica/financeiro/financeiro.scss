@@ -412,3 +412,20 @@ tbody tr:hover{
     }
 
 }
+.grafico,
+.grafico-largo{
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.grafico canvas{
+    width:100% !important;
+    height:350px !important;
+}
+
+.grafico-largo canvas{
+    width:100% !important;
+    height:420px !important;
+}
